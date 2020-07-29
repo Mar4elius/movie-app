@@ -1,0 +1,9 @@
+/*
+tailwind setup for react
+https: //daveceddia.com/tailwind-create-react-app/#production
+*/
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
