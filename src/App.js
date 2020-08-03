@@ -4,9 +4,7 @@ import Layout from './components/Layout'
 function App() {
   return (
     <div className="App">
-      <div className="w-full">
-        <Layout />
-      </div>
+      <Layout />
     </div>
   )
 }
