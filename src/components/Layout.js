@@ -5,7 +5,7 @@ import Navigation from './Navigation'
 
 export default function Layout() {
   return (
-    <div className="w-full">
+    <div className="flex flex-col w-full h-screen">
       <TopBar />
       <Navigation />
     </div>
