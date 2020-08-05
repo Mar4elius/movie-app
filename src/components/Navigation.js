@@ -16,11 +16,13 @@ export default function Navigation() {
     { icon: 'random', name: 'Random' },
   ]
   return (
-    <div className="w-1/5 bg-gray-200 h-full">
+    <div className="w-1/5 bg-gray-200 h-screen">
       <ul>
         {icons.map(icon => {
           return (
-            <li className="m-5 flex align-baseline justify-center">
+            <li
+              className="m-5 flex align-baseline justify-center"
+              key={icon.icon}>
               <div className="flex justify-start">
                 <FontAwesomeIcon icon={icon.icon} size="2x" />
               </div>
