@@ -3,11 +3,14 @@ import React from 'react'
 import TopBar from './TopBar'
 import Navigation from './Navigation'
 
-export default function Layout() {
+export default function Layout(props) {
   return (
-    <div className="flex flex-col w-full h-screen">
+    <div className="flex flex-col w-full">
       <TopBar />
-      <Navigation />
+      <div className="w-full flex">
+        <Navigation />
+        {props.children}
+      </div>
     </div>
   )
 }
