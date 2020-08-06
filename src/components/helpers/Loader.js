@@ -7,7 +7,7 @@ export default function Loader(props) {
   }
 
   return (
-    <div className="w-full text-center">
+    <div className="w-full h-full z-10 fixed left-0 top-0 flex justify-center items-center opacity-75 bg-black">
       <FontAwesomeIcon
         icon={props.icon}
         spin={props.isSpinning}
