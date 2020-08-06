@@ -11,6 +11,7 @@ import {
   faStar,
   faUserFriends,
   faChartLine,
+  faCircleNotch,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -21,7 +22,8 @@ library.add(
   faRandom,
   faStar,
   faUserFriends,
-  faChartLine
+  faChartLine,
+  faCircleNotch
 )
 
 function App() {
