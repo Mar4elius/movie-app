@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function MovieCard({ movie }) {
   return (
-    <div className="mb-10 bg-regular-grey border-2" key={movie.id}>
+    <div className="mb-10 bg-regular-grey border-2">
       {/* 
               <p>{movie.release_date}</p> */}
       <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
