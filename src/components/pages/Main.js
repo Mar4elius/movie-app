@@ -51,9 +51,13 @@ export default function Main() {
       )
   }, [currentPage])
 
+  function searchMovies() {
+    console.log('hello')
+  }
+
   return (
     <div className="w-4/5">
-      <Alphabet />
+      <Alphabet handleOnClick={searchMovies} />
 
       <Errors
         showErrors={error?.response?.data?.success}

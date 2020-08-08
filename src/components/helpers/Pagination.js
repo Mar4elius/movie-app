@@ -7,7 +7,7 @@ export default function Pagination(props) {
     backArrow = (
       <FontAwesomeIcon
         icon="chevron-left"
-        className="mr-5"
+        className="mr-5 cursor-pointer"
         size="lg"
         onClick={() => props.handleOnClick(props.currentPage - 1)}
       />
@@ -19,6 +19,7 @@ export default function Pagination(props) {
       {backArrow}
       <FontAwesomeIcon
         icon="chevron-right"
+        className="cursor-pointer"
         size="lg"
         onClick={() => props.handleOnClick(props.currentPage + 1)}
       />

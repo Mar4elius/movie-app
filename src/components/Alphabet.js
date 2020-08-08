@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Alphabet() {
+export default function Alphabet({ handleOnClick }) {
   const alphabet = [
     ...new Array(10).keys(),
     ...Array.apply(null, new Array(26)).map((_, idx) =>
@@ -13,7 +13,11 @@ export default function Alphabet() {
       <ul className="flex h-16 text-2xl justify-between">
         {alphabet.map(symbol => {
           return (
-            <li className="m-2" key={symbol}>
+            <li
+              className="m-2"
+              key={symbol}
+              onClick={handleOnClick}
+              className="cursor-pointer">
               {symbol}
             </li>
           )

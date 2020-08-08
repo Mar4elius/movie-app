@@ -21,7 +21,7 @@ export default function Navigation() {
         {icons.map(icon => {
           return (
             <li
-              className="m-5 flex align-baseline justify-center"
+              className="m-5 flex align-baseline justify-center cursor-pointer"
               key={icon.icon}>
               <div className="flex justify-start">
                 <FontAwesomeIcon icon={icon.icon} size="2x" />
