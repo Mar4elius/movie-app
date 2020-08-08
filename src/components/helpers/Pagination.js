@@ -3,16 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function Pagination(props) {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-end mx-5">
       <FontAwesomeIcon
         icon="chevron-left"
         className="mr-5"
-        size="2x"
+        size="lg"
         onClick={() => props.handleOnClick(props.currentPage - 1)}
       />
       <FontAwesomeIcon
         icon="chevron-right"
-        size="2x"
+        size="lg"
         onClick={() => props.handleOnClick(props.currentPage + 1)}
       />
     </div>

@@ -19,7 +19,7 @@ export default function Alphabet() {
           )
         })}
       </ul>
-      <hr className="sky-blue p-5" />
+      <hr className="sky-blue pt-5" />
     </div>
   )
 }
