@@ -12,6 +12,8 @@ import {
   faUserFriends,
   faChartLine,
   faCircleNotch,
+  faChevronLeft,
+  faChevronRight,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -23,7 +25,9 @@ library.add(
   faStar,
   faUserFriends,
   faChartLine,
-  faCircleNotch
+  faCircleNotch,
+  faChevronLeft,
+  faChevronRight
 )
 
 function App() {
