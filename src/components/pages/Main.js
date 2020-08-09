@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 // Support
 import axios from 'axios'
 import Masonry from 'react-masonry-css'
@@ -23,6 +23,7 @@ export default function Main() {
     700: 2,
     500: 1,
   }
+
   // Note: the empty deps array [] means
   // this useEffect will run once
   // similar
@@ -51,8 +52,38 @@ export default function Main() {
       )
   }, [currentPage])
 
-  function searchMovies() {
-    console.log('hello')
+  function searchMovies(value) {
+    setIsLoading(true)
+    setCurrentPage(1)
+    axios
+      .get(`${mtdbLink}/search/multi`, {
+        params: {
+          api_key: process.env.REACT_APP_TMDB_API_KEY,
+          page: currentPage,
+          query: encodeURI(value),
+        },
+      })
+      .then(
+        response => {
+          //TODO: come back to this later so to make it sort correctly
+          const moviesSortedByName = response.data.results.sort((a, b) => {
+            if (a.name < b.name) {
+              return -1
+            }
+            if (a.name > b.name) {
+              return 1
+            }
+            return 0
+          })
+          setMovies(moviesSortedByName)
+          setIsLoading(false)
+          setCurrentPage(response.data.page)
+        },
+        error => {
+          setIsLoading(false)
+          setError(error)
+        }
+      )
   }
 
   return (

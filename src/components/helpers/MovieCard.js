@@ -9,7 +9,7 @@ export default function MovieCard({ movie }) {
       <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
       <div className="p-4">
         <h4 className="text-sky-blue my-2">
-          {movie.title ?? 'Title Unavailable'}
+          {movie.title ?? movie.original_name ?? 'No title'}
         </h4>
 
         <ul className="flex justify-between text-pink-500">
