@@ -2,8 +2,6 @@ import React from 'react'
 // Image
 import tmdb from '../assets/images/tmdb.svg'
 
-import { useSearchContext } from '../context/SearchContext'
-
 export default function TopBar() {
   function handleOnBlur(e) {}
 
