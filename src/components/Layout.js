@@ -2,6 +2,35 @@ import React from 'react'
 // Components
 import TopBar from './TopBar'
 import Navigation from './Navigation'
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+import {
+  faUser,
+  faVideo,
+  faLayerGroup,
+  faHeart,
+  faRandom,
+  faStar,
+  faUserFriends,
+  faChartLine,
+  faCircleNotch,
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faUser,
+  faVideo,
+  faLayerGroup,
+  faHeart,
+  faRandom,
+  faStar,
+  faUserFriends,
+  faChartLine,
+  faCircleNotch,
+  faChevronLeft,
+  faChevronRight
+)
 
 export default function Layout(props) {
   return (
