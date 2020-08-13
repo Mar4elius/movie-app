@@ -3,12 +3,11 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 // Data
-import routes from '../assets/data/routes'
+import routes from 'assets/data/routes'
 
 // import Main from '../components/pages/Main'
 
 export default function Navigation() {
-  console.log(routes)
   return (
     <div className="w-1/5 bg-gray-200 h-full">
       <nav>

@@ -1,7 +1,8 @@
 import React from 'react'
 // Components
-import TopBar from './TopBar'
-import Navigation from './Navigation'
+import TopBar from 'components/TopBar'
+import Navigation from 'components/Navigation'
+// Support
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import {

@@ -1,6 +1,6 @@
 import React from 'react'
 // Image
-import tmdb from '../assets/images/tmdb.svg'
+import tmdb from 'assets/images/tmdb.svg'
 
 export default function TopBar() {
   function handleOnBlur(e) {}

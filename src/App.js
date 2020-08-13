@@ -1,7 +1,7 @@
 import React from 'react'
 // Components
-import Layout from './components/Layout'
-import MovieDetails from './components/MovieDetails'
+import Layout from 'components/Layout'
+import MovieDetails from 'components/MovieDetails'
 // Support
 import { Route } from 'react-router-dom'
 // Data

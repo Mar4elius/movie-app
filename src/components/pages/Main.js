@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 // Support
 import axios from 'axios'
-import { Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Masonry from 'react-masonry-css'
 // Helper Components
-import Alphabet from '../Alphabet'
-import Errors from '../helpers/Errors'
-import MovieCard from '../helpers/MovieCard'
-import Loader from '../helpers/Loader'
-import Pagination from '../helpers/Pagination'
-import MovieDetails from '../MovieDetails'
+import Alphabet from 'components/Alphabet'
+import Errors from 'components/helpers/Errors'
+import MovieCard from 'components/helpers/MovieCard'
+import Loader from 'components/helpers/Loader'
+import Pagination from 'components/helpers/Pagination'
 
 export default function Main() {
   // State variables
