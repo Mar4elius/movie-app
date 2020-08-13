@@ -16,6 +16,7 @@ import {
   faCircleNotch,
   faChevronLeft,
   faChevronRight,
+  faIgloo,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -29,7 +30,8 @@ library.add(
   faChartLine,
   faCircleNotch,
   faChevronLeft,
-  faChevronRight
+  faChevronRight,
+  faIgloo
 )
 
 export default function Layout(props) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 // Support
 import axios from 'axios'
+import { Link, Route } from 'react-router-dom'
 import Masonry from 'react-masonry-css'
 // Helper Components
 import Alphabet from '../Alphabet'
@@ -8,6 +9,7 @@ import Errors from '../helpers/Errors'
 import MovieCard from '../helpers/MovieCard'
 import Loader from '../helpers/Loader'
 import Pagination from '../helpers/Pagination'
+import MovieDetails from '../MovieDetails'
 
 export default function Main() {
   // State variables
@@ -87,7 +89,7 @@ export default function Main() {
   }
 
   return (
-    <div className="w-4/5">
+    <div>
       <Alphabet handleOnClick={searchMovies} />
 
       <Errors
@@ -109,7 +111,14 @@ export default function Main() {
         className="flex w-auto m-2"
         columnClassName="m-2">
         {movies.map(movie => {
-          return <MovieCard movie={movie} key={movie.id} />
+          return (
+            <div key={movie.id}>
+              <Link to={`/movie/${movie.id}`}>
+                <MovieCard movie={movie} key={movie.id} />
+              </Link>
+              {/* <Route path={`/movie/${movie.id}`} component={MovieDetails} /> */}
+            </div>
+          )
         })}
       </Masonry>
 
