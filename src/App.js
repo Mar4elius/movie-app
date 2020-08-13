@@ -1,12 +1,28 @@
 import React from 'react'
+// Components
 import Layout from './components/Layout'
-import Main from './components/pages/Main'
+import MovieDetails from './components/MovieDetails'
+// Support
+import { Route } from 'react-router-dom'
+// Data
+import routes from './assets/data/routes'
 
 function App() {
   return (
-    <div className="App">
+    <div className="flex flex-col w-full">
       <Layout>
-        <Main />
+        {/*  The <Route>‘s path is matched with the current location and a component gets rendered */}
+        <div className="w-4/5">
+          {routes.map(route => (
+            <Route
+              key={route.icon}
+              exact
+              path={route.path}
+              component={route.component}
+            />
+          ))}
+          <Route path="/movie" component={MovieDetails} />
+        </div>
       </Layout>
     </div>
   )

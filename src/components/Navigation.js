@@ -1,38 +1,37 @@
 import React from 'react'
+// Support
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
+// Data
+import routes from '../assets/data/routes'
+
+// import Main from '../components/pages/Main'
 
 export default function Navigation() {
-  const icons = [
-    {
-      icon: 'user',
-      name: 'Profile',
-    },
-    { icon: 'video', name: 'My Video' },
-    { icon: 'layer-group', name: 'Collection' },
-    {
-      icon: 'heart',
-      name: 'Favorites',
-    },
-    { icon: 'random', name: 'Random' },
-  ]
+  console.log(routes)
   return (
-    <div className="w-1/5 bg-gray-200 h-screen">
-      <ul>
-        {icons.map(icon => {
-          return (
-            <li
-              className="m-5 flex align-baseline justify-center cursor-pointer"
-              key={icon.icon}>
-              <div className="flex justify-start">
-                <FontAwesomeIcon icon={icon.icon} size="2x" />
-              </div>
-              <div className="flex justify-center">
-                <p className="tracking-widest mx-5">{icon.name}</p>
-              </div>
-            </li>
-          )
-        })}
-      </ul>
+    <div className="w-1/5 bg-gray-200 h-full">
+      <nav>
+        <ul>
+          {routes.map(route => {
+            return (
+              <li
+                className="m-5 flex align-baseline justify-center cursor-pointer"
+                key={route.icon}>
+                {/* <Link/> is the element you could use to navigate through routes. */}
+                <Link to={route.path}>
+                  <div className="flex justify-start">
+                    <FontAwesomeIcon icon={route.icon} size="2x" />
+                  </div>
+                  <div className="flex justify-center">
+                    <p className="tracking-widest mx-5">{route.name}</p>
+                  </div>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      </nav>
     </div>
   )
 }
