@@ -21,7 +21,7 @@ function App() {
               component={route.component}
             />
           ))}
-          <Route path="/movie" component={MovieDetails} />
+          <Route path="/movie/:id" component={MovieDetails} />
         </div>
       </Layout>
     </div>
