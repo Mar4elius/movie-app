@@ -16,6 +16,7 @@ export default function MovieDetails() {
   const [movieCast, setMovieCast] = useState(null)
 
   const [activeMediaTab, setActiveMediaTab] = useState('screenshots')
+  const [activeCastTab, setActiveCastTab] = useState('cast')
 
   const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
@@ -48,7 +49,6 @@ export default function MovieDetails() {
       case 'videos':
         return (
           <div className="w-full">
-            <h2>Videos</h2>
             <div className="flex overflow-x-scroll">
               {movieVideos.map(video => {
                 return (
@@ -90,6 +90,47 @@ export default function MovieDetails() {
                   src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
                   key={image.file_path}
                 />
+              )
+            })}
+          </div>
+        )
+    }
+  }
+
+  const castTabComponent = () => {
+    switch (activeCastTab) {
+      case 'crew':
+        return (
+          <div className="flex">
+            {movieCast.crew.map(crew => {
+              return (
+                <div className="">
+                  <div className="bg-light-grey m-2 w-48">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500/${crew.profile_path}`}
+                    />
+                    <p className="bold">{crew.name}</p>
+                    <p>{crew.job}</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )
+      default:
+        return (
+          <div className="flex">
+            {movieCast.cast.map(cast => {
+              return (
+                <div className="">
+                  <div className="bg-light-grey m-2 w-48">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
+                    />
+                    <p className="bold">{cast.name}</p>
+                    <p>{`(${cast.character})`}</p>
+                  </div>
+                </div>
               )
             })}
           </div>
@@ -229,25 +270,20 @@ export default function MovieDetails() {
 
         <div className="w-full my-5">
           <div className="flex">
-            <div className="w-2/5 flex justify-center">
-              <h2>Cast</h2>
-            </div>
-            <div className="w-full overflow-x-scroll">
-              <div className="flex">
-                {movieCast.cast.map(cast => {
-                  return (
-                    <div className="">
-                      <div className="bg-light-grey m-2 w-32 flex">
-                        <img
-                          src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
-                        />
-                        {/* <p className="bold">{cast.name}</p> */}
-                      </div>
-                    </div>
-                  )
-                })}
+            <div className="w-2/5">
+              <div className="text-center">
+                <h2>Cast</h2>
+              </div>
+              <div className="flex flex-col h-full align-middle">
+                <button onClick={() => setActiveCastTab('cast')}>
+                  Cast Total: {movieCast.cast.length}
+                </button>
+                <button onClick={() => setActiveCastTab('crew')}>
+                  Cast Crew: {movieCast.crew.length}
+                </button>
               </div>
             </div>
+            <div className="w-full overflow-x-scroll">{castTabComponent()}</div>
           </div>
         </div>
 
@@ -261,7 +297,7 @@ export default function MovieDetails() {
                 <h5>Screenshots</h5>
               </button>
               <button onClick={() => setActiveMediaTab('videos')}>
-                Videos
+                <h5>Videos</h5>
               </button>
               <button onClick={() => setActiveMediaTab('posters')}>
                 <h5>Posters</h5>
