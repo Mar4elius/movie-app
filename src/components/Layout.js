@@ -18,7 +18,17 @@ import {
   faChevronLeft,
   faChevronRight,
   faIgloo,
+  faLink,
+  faList,
+  faEye,
 } from '@fortawesome/free-solid-svg-icons'
+
+import {
+  faFacebook,
+  faImdb,
+  faInstagram,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons'
 
 library.add(
   faUser,
@@ -32,7 +42,14 @@ library.add(
   faCircleNotch,
   faChevronLeft,
   faChevronRight,
-  faIgloo
+  faIgloo,
+  faFacebook,
+  faImdb,
+  faInstagram,
+  faTwitter,
+  faLink,
+  faList,
+  faEye
 )
 
 export default function Layout(props) {
