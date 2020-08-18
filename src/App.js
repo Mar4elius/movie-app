@@ -12,7 +12,7 @@ function App() {
     <div className="flex flex-col w-full">
       <Layout>
         {/*  The <Route>‘s path is matched with the current location and a component gets rendered */}
-        <div className="w-4/5">
+        <div className="w-5/6">
           {routes.map(route => (
             <Route
               key={route.icon}

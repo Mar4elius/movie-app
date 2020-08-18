@@ -9,21 +9,21 @@ import routes from 'assets/data/routes'
 
 export default function Navigation() {
   return (
-    <div className="w-1/5 bg-gray-200 h-full">
+    <div className="w-1/6 bg-gray-200 max-h-full">
       <nav>
         <ul>
           {routes.map(route => {
             return (
-              <li
-                className="m-5 flex align-baseline justify-center cursor-pointer"
-                key={route.icon}>
+              <li className="m-5 cursor-pointer" key={route.icon}>
                 {/* <Link/> is the element you could use to navigate through routes. */}
                 <Link to={route.path}>
                   <div className="flex justify-start">
-                    <FontAwesomeIcon icon={route.icon} size="2x" />
-                  </div>
-                  <div className="flex justify-center">
-                    <p className="tracking-widest mx-5">{route.name}</p>
+                    <div className="w-16">
+                      <FontAwesomeIcon icon={route.icon} size="2x" />
+                    </div>
+                    <div>
+                      <p className="tracking-widest mx-5">{route.name}</p>
+                    </div>
                   </div>
                 </Link>
               </li>

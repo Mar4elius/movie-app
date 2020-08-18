@@ -7,10 +7,10 @@ export default function TopBar() {
 
   return (
     <div className="flex h-24 items-center text-center">
-      <div className="w-1/5 bg-sky-blue h-full flex justify-center">
+      <div className="w-1/6 bg-sky-blue h-full flex justify-center">
         <p>Find Your Movie</p>
       </div>
-      <div className="w-4/5 flex justify-around align-bottom">
+      <div className="w-full flex justify-around align-bottom">
         <p>Mara</p>
 
         <input

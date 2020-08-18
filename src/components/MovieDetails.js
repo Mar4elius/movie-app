@@ -14,6 +14,7 @@ export default function MovieDetails() {
   const [movieVideos, setMovieVideos] = useState(null)
   const [movieExternalIds, setMovieExternalIds] = useState(null)
   const [movieCast, setMovieCast] = useState(null)
+  const [movieReviews, setMovieReviews] = useState(null)
 
   const [activeMediaTab, setActiveMediaTab] = useState('screenshots')
   const [activeCastTab, setActiveCastTab] = useState('cast')
@@ -24,7 +25,7 @@ export default function MovieDetails() {
     API.get(`/movie/${movieId}`, {
       params: {
         api_key: process.env.REACT_APP_TMDB_API_KEY,
-        append_to_response: 'images,videos,external_ids,credits',
+        append_to_response: 'images,videos,external_ids,credits,reviews',
         include_image_language: 'en,null',
       },
     }).then(
@@ -82,7 +83,7 @@ export default function MovieDetails() {
       // screenshots
       default:
         return (
-          <div className="flex flex-row overflow-x-scroll">
+          <div className="flex">
             {movieImages.backdrops.map(image => {
               return (
                 <img
@@ -270,41 +271,45 @@ export default function MovieDetails() {
 
         <div className="w-full my-5">
           <div className="flex">
-            <div className="w-2/5">
+            <div className="w-2/5 border-r-2 border-sky-blue">
               <div className="text-center">
                 <h2>Cast</h2>
               </div>
-              <div className="flex flex-col h-full align-middle">
+              <div className="flex flex-col">
                 <button onClick={() => setActiveCastTab('cast')}>
-                  Cast Total: {movieCast.cast.length}
+                  Cast ({movieCast.cast.length})
                 </button>
                 <button onClick={() => setActiveCastTab('crew')}>
-                  Cast Crew: {movieCast.crew.length}
+                  Crew: ({movieCast.crew.length})
                 </button>
               </div>
             </div>
             <div className="w-full overflow-x-scroll">{castTabComponent()}</div>
           </div>
         </div>
-
-        <div className="w-full">
+        <div className="w-full my-5">
           <div className="flex">
-            <div className="w-2/5 flex justify-center my-5">
-              <h2>Media</h2>
+            <div className="w-2/5">
+              <div className="text-center">
+                <h2>Media</h2>
+              </div>
+
+              <div className="flex flex-col">
+                <button onClick={() => setActiveMediaTab('screenshots')}>
+                  Screenshots ({movieImages.backdrops.length})
+                </button>
+                <button onClick={() => setActiveMediaTab('videos')}>
+                  Videos ({movieVideos.length})
+                </button>
+                <button onClick={() => setActiveMediaTab('posters')}>
+                  Posters ({movieImages.posters.length})
+                </button>
+              </div>
             </div>
-            <div className="w-full flex justify-around">
-              <button onClick={() => setActiveMediaTab('screenshots')}>
-                <h5>Screenshots</h5>
-              </button>
-              <button onClick={() => setActiveMediaTab('videos')}>
-                <h5>Videos</h5>
-              </button>
-              <button onClick={() => setActiveMediaTab('posters')}>
-                <h5>Posters</h5>
-              </button>
+            <div className="w-full overflow-x-scroll">
+              {mediaTabComponent()}
             </div>
           </div>
-          <div className="w-full">{mediaTabComponent()}</div>
         </div>
       </div>
     )
