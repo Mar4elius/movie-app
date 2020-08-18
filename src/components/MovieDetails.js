@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo, useRef } from 'react'
 // Support
 import API from 'api/api'
 import { useParams } from 'react-router-dom'
@@ -8,10 +8,14 @@ import Loader from 'components/helpers/Loader'
 
 export default function MovieDetails() {
   const { id: movieId } = useParams()
+
   const [movie, setMovie] = useState(null)
   const [movieImages, setMovieImages] = useState(null)
   const [movieVideos, setMovieVideos] = useState(null)
   const [movieExternalIds, setMovieExternalIds] = useState(null)
+  const [movieCast, setMovieCast] = useState(null)
+
+  const [activeMediaTab, setActiveMediaTab] = useState('screenshots')
 
   const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
@@ -19,16 +23,17 @@ export default function MovieDetails() {
     API.get(`/movie/${movieId}`, {
       params: {
         api_key: process.env.REACT_APP_TMDB_API_KEY,
-        append_to_response: 'images,videos,external_ids',
+        append_to_response: 'images,videos,external_ids,credits',
         include_image_language: 'en,null',
       },
     }).then(
       response => {
-        const { images, videos, external_ids } = response.data
+        const { images, videos, external_ids, credits } = response.data
         setMovie(response.data)
         setMovieImages(images)
         setMovieVideos(videos.results)
         setMovieExternalIds(external_ids)
+        setMovieCast(credits)
         setIsLoading(false)
       },
       error => {
@@ -38,22 +43,8 @@ export default function MovieDetails() {
     )
   }, [])
 
-  function handleTabClick(value) {
-    switch (value) {
-      case 'screenshots':
-        return (
-          <div className="flex flex-row overflow-x-scroll">
-            {movieImages.backdrops.map(image => {
-              return (
-                <img
-                  className="m-2"
-                  src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
-                  key={image.file_path}
-                />
-              )
-            })}
-          </div>
-        )
+  const mediaTabComponent = _ => {
+    switch (activeMediaTab) {
       case 'videos':
         return (
           <div className="w-full">
@@ -73,7 +64,22 @@ export default function MovieDetails() {
           </div>
         )
       case 'posters':
-        break
+        return (
+          <div className="w-full">
+            <div className="flex overflow-x-scroll">
+              {movieImages.posters.map(poster => {
+                return (
+                  <img
+                    className="m-2"
+                    src={`https://image.tmdb.org/t/p/w500/${poster.file_path}`}
+                    key={poster.file_path}
+                  />
+                )
+              })}
+            </div>
+          </div>
+        )
+      // screenshots
       default:
         return (
           <div className="flex flex-row overflow-x-scroll">
@@ -91,7 +97,7 @@ export default function MovieDetails() {
     }
   }
 
-  if (movie && movieImages && movieVideos && movieExternalIds) {
+  if (movie && movieImages && movieVideos && movieExternalIds && movieCast) {
     return (
       <div className="flex flex-wrap m-2">
         <div className="w-full flex bg-blue-200">
@@ -221,15 +227,48 @@ export default function MovieDetails() {
           </div>
         </div>
 
-        <div className="w-full">
-          <div className="flex justify-evenly">
-            <h2>Media</h2>
-            <button onClick={() => handleTabClick('screenshots')}>
-              Screenshots
-            </button>
-            <button onClick={() => handleTabClick('videos')}>Videos</button>
-            <button onClick={() => handleTabClick('posters')}>Posters</button>
+        <div className="w-full my-5">
+          <div className="flex">
+            <div className="w-2/5 flex justify-center">
+              <h2>Cast</h2>
+            </div>
+            <div className="w-full overflow-x-scroll">
+              <div className="flex">
+                {movieCast.cast.map(cast => {
+                  return (
+                    <div className="">
+                      <div className="bg-light-grey m-2 w-32 flex">
+                        <img
+                          src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
+                        />
+                        {/* <p className="bold">{cast.name}</p> */}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div className="w-full">
+          <div className="flex">
+            <div className="w-2/5 flex justify-center my-5">
+              <h2>Media</h2>
+            </div>
+            <div className="w-full flex justify-around">
+              <button onClick={() => setActiveMediaTab('screenshots')}>
+                <h5>Screenshots</h5>
+              </button>
+              <button onClick={() => setActiveMediaTab('videos')}>
+                Videos
+              </button>
+              <button onClick={() => setActiveMediaTab('posters')}>
+                <h5>Posters</h5>
+              </button>
+            </div>
+          </div>
+          <div className="w-full">{mediaTabComponent()}</div>
         </div>
       </div>
     )
