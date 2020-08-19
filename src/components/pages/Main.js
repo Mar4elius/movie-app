@@ -16,6 +16,7 @@ export default function Main() {
   const [isLoading, setIsLoading] = useState(false)
   const [movies, setMovies] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
+  const [trendStatus, setTrendStatus] = useState('week')
   const breakpointColumnsObj = {
     default: 4,
     1100: 3,
@@ -28,7 +29,9 @@ export default function Main() {
   // similar
   useEffect(() => {
     setIsLoading(true)
-    API.get(`/trending/all/week`, {
+    const url =
+      trendStatus === 'week' ? `/trending/all/week` : '/trending/all/day'
+    API.get(url, {
       params: {
         api_key: process.env.REACT_APP_TMDB_API_KEY,
         page: currentPage,
@@ -47,7 +50,7 @@ export default function Main() {
         setError(error)
       }
     )
-  }, [currentPage])
+  }, [currentPage, trendStatus])
 
   function searchMovies(value) {
     setIsLoading(true)
@@ -89,8 +92,25 @@ export default function Main() {
         showErrors={error?.response?.data?.success}
         error={error?.response?.data}
       />
-
-      <Pagination handleOnClick={setCurrentPage} currentPage={currentPage} />
+      <div className="w-full flex items-center justify-center">
+        <h6>Trending</h6>
+        <button
+          className="rounded-lg bg-custom-yellow p-1"
+          onClick={() => setTrendStatus('week')}>
+          This Week
+        </button>
+        <button
+          className="rounded-lg bg-custom-yellow p-1"
+          onClick={() => setTrendStatus('day')}>
+          Today
+        </button>
+        <div className="flex justify-end">
+          <Pagination
+            handleOnClick={setCurrentPage}
+            currentPage={currentPage}
+          />
+        </div>
+      </div>
 
       <Loader
         classes="text-sky-blue opacity-100"

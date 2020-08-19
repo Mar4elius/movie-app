@@ -18,12 +18,12 @@ export default function Navigation() {
                 {/* <Link/> is the element you could use to navigate through routes. */}
                 <Link to={route.path}>
                   <div className="flex justify-start">
-                    <span className="w-16 text-custom-blue hover:text-custom-orange">
+                    <span className="w-16 text-custom-blue hover:text-custom-orange flex justify-center">
                       <FontAwesomeIcon icon={route.icon} size="2x" />
                     </span>
-                    <p className="tracking-widest mx-5 text-custom-blue">
-                      {route.name}
-                    </p>
+                    <div className="tracking-widest mx-5 text-custom-blue">
+                      <p>{route.name}</p>
+                    </div>
                   </div>
                 </Link>
               </li>

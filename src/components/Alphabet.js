@@ -24,7 +24,7 @@ export default function Alphabet(props) {
               <span className="text-custom-blue hover:text-custom-orange flex">
                 <button
                   onClick={e => setSelectedLetter(e.target.textContent)}
-                  className=" transform hover:-translate-y-2 hover:scale-110">
+                  className=" transform hover:-translate-y-2 hover:font-bold">
                   {symbol}
                 </button>
               </span>
