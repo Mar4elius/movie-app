@@ -16,16 +16,18 @@ export default function Alphabet(props) {
   }, [selectedLetter])
 
   return (
-    <div>
+    <div className="m-5">
       <ul className="flex h-16 text-2xl justify-between">
         {alphabet.map(symbol => {
           return (
-            <li
-              className="m-2"
-              key={symbol}
-              onClick={e => setSelectedLetter(e.target.textContent)}
-              className="cursor-pointer">
-              {symbol}
+            <li className="m-2" key={symbol} className="cursor-pointer">
+              <span className="text-custom-blue hover:text-custom-orange flex">
+                <button
+                  onClick={e => setSelectedLetter(e.target.textContent)}
+                  className=" transform hover:-translate-y-2 hover:scale-110">
+                  {symbol}
+                </button>
+              </span>
             </li>
           )
         })}
