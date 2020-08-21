@@ -10,7 +10,7 @@ import routes from 'assets/data/routes'
 export default function Navigation() {
   return (
     <div className="w-1/6 bg-custom-grey max-h-full border-r-2 border-custom-blue">
-      <nav>
+      <nav className="fixed">
         <ul>
           {routes.map(route => {
             return (

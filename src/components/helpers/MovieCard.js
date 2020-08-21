@@ -3,10 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function MovieCard({ movie }) {
   return (
-    <div className="border-2 mb-5 rounded-lg">
-      <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+    <div className="border-r-2 border-l-2 mb-5 transform hover:-translate-y-1 hover:scale-105 easy-in duration-100">
+      <img
+        className="rounded-lg"
+        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+      />
       <div className="p-4">
-        <h4 className="my-2">
+        <h4 className="my-2 text-custom-dark-blue">
           {movie.title ?? movie.original_name ?? 'No title'}(
           {new Date(movie.release_date).getFullYear() || 'Year Not Set'})
         </h4>

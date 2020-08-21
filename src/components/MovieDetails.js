@@ -142,9 +142,12 @@ export default function MovieDetails() {
   if (movie && movieImages && movieVideos && movieExternalIds && movieCast) {
     return (
       <div className="flex flex-wrap m-2">
-        <div className="w-full flex bg-blue-200">
+        <div className="w-full flex bg-blue-200 rounded-lg">
           <div className="w-2/5">
-            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+            <img
+              className="rounded-lg"
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+            />
           </div>
           <div className="w-full m-5">
             <div className="flex flex-col space-y-5">

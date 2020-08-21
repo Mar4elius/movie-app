@@ -9,14 +9,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'custom-orange': '#F95700FF',
-        'custom-yellow': '#EBCC72',
-        'custom-blue': '#00A4CCFF',
-        'custom-grey': '#E1DFDB',
-        'custom-black': '#2A2728',
+        'custom-orange': '#E74C3C',
+        'custom-white': '#ECF0F1',
+        'custom-blue': '#3498DB',
+        'custom-grey': '#B5B5B7',
+        'custom-dark-blue': '#2C3E50',
       },
     },
   },
-  variants: {},
+  variants: {
+    transition: ['hover'],
+  },
   plugins: [],
 }

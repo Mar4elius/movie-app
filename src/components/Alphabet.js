@@ -16,8 +16,8 @@ export default function Alphabet(props) {
   }, [selectedLetter])
 
   return (
-    <div className="m-5">
-      <ul className="flex h-16 text-2xl justify-between">
+    <div className="m-2">
+      <ul className="flex text-2xl justify-between">
         {alphabet.map(symbol => {
           return (
             <li className="m-2" key={symbol} className="cursor-pointer">
