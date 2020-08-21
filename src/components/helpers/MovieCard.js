@@ -3,18 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function MovieCard({ movie }) {
   return (
-    <div className="border-r-2 border-l-2 mb-5 transform hover:-translate-y-1 hover:scale-105 easy-in duration-100">
+    <div className="mb-5 transform easy-in duration-100 hover:-translate-y-1 hover:scale-105">
       <img
         className="rounded-lg"
         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
       />
-      <div className="p-4">
-        <h4 className="my-2 text-custom-dark-blue">
-          {movie.title ?? movie.original_name ?? 'No title'}(
+      <div className="p-4 border-b-2 border-custom-dark-blue">
+        <h4 className="my-2">
+          {movie.title ?? movie.original_name ?? 'No title'} (
           {new Date(movie.release_date).getFullYear() || 'Year Not Set'})
         </h4>
 
-        <ul className="flex justify-between text-custom-orange">
+        <ul className="flex justify-between text-custom-orange ">
           <li className="flex items-center">
             <FontAwesomeIcon icon="star" />
             <p className="ml-1">{movie.vote_average}</p>

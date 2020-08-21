@@ -32,7 +32,7 @@ export default function Alphabet(props) {
           )
         })}
       </ul>
-      <hr className="sky-blue pt-5" />
+      <hr className="my-5" />
     </div>
   )
 }
