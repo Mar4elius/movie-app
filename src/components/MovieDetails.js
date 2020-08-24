@@ -141,22 +141,42 @@ export default function MovieDetails() {
 
   if (movie && movieImages && movieVideos && movieExternalIds && movieCast) {
     return (
-      <div className="flex flex-wrap m-2">
-        <div className="w-full flex bg-blue-200 rounded-lg">
-          <div className="w-2/5">
+      <div className="flex flex-wrap">
+        <div className="w-full flex relative overflow-hidden">
+          <div className="w-full h-screen-75">
             <img
-              className="rounded-lg"
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              className=" absolute left-0 top-0 w-full flex"
+              src={`https://image.tmdb.org/t/p/w1280/${movieImages.backdrops[0].file_path}`}
             />
           </div>
-          <div className="w-full m-5">
-            <div className="flex flex-col space-y-5">
-              <div className="flex">
-                <div className="w-1/2">
-                  <h2>
-                    {movie.title}
-                    {` (${new Date(movie.release_date).getFullYear()})`}
-                  </h2>
+          <div className="w-4/5 absolute z-10 bg-gradient-to-r from-custom-grey h-full p-5">
+            <div className="w-1/2">
+              <div className="flex flex-col space-y-5">
+                <div className="flex">
+                  <div className="w-full">
+                    <h2>
+                      {movie.title}
+                      {` (${new Date(movie.release_date).getFullYear()})`}
+                    </h2>
+                  </div>
+                </div>
+                <ul className="flex">
+                  <li className="pr-3">{movie.release_date}</li>
+                  <li className="pr-3">{movie.runtime} min</li>
+                  {movie.production_countries.map(country => (
+                    <li key={country.name} className="pr-3">
+                      {country.name}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex">
+                  {movie.genres.map(genre => (
+                    <button
+                      className="mr-3 p-2 bg-sky-blue text-center"
+                      key={genre.name}>
+                      {genre.name}
+                    </button>
+                  ))}
                 </div>
                 <div className="w-1/2 flex justify-end text-xl align-baseline">
                   <FontAwesomeIcon icon="star" size="2x" />
@@ -164,109 +184,94 @@ export default function MovieDetails() {
                   <FontAwesomeIcon icon="user-friends" size="2x" />
                   <span className="pl-2">{movie.vote_count}</span>
                 </div>
+                <div className="flex">
+                  {[...Array(10)].map((e, i) => (
+                    <span className="pr-3" key={i}>
+                      <FontAwesomeIcon icon="star" size="lg" />
+                    </span>
+                  ))}
+                </div>
+                <div className="my-5">
+                  <h2>Story</h2>
+                  <p>{movie.overview}</p>
+                </div>
               </div>
-              <ul className="flex">
-                <li className="pr-3">{movie.release_date}</li>
-                <li className="pr-3">{movie.runtime} min</li>
-                {movie.production_countries.map(country => (
-                  <li key={country.name} className="pr-3">
-                    {country.name}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex">
-                {movie.genres.map(genre => (
-                  <button
-                    className="mr-3 p-2 bg-sky-blue text-center"
-                    key={genre.name}>
-                    {genre.name}
-                  </button>
-                ))}
-              </div>
-              <div className="flex">
-                {[...Array(10)].map((e, i) => (
-                  <span className="pr-3" key={i}>
-                    <FontAwesomeIcon icon="star" size="lg" />
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="my-5">
-              <h2>Story</h2>
-              <p>{movie.overview}</p>
-            </div>
 
-            <div className="flex justify-between">
-              <div className="flex">
-                <button>
-                  <span className="pr-3">
-                    <FontAwesomeIcon icon="list" size="2x" />
-                  </span>
-                </button>
-                <button>
-                  <span className="pr-3">
-                    <FontAwesomeIcon icon="heart" size="2x" />
-                  </span>
-                </button>
-                <button>
-                  <FontAwesomeIcon icon="eye" size="2x" />
-                </button>
-              </div>
-              <div>
-                <a className="pr-3" href={movie.homepage} target="_blank">
-                  <FontAwesomeIcon icon="link" size="2x" />
-                </a>
-                {Object.keys(movieExternalIds).map(key => {
-                  if (movieExternalIds[key] !== null) {
-                    switch (key) {
-                      case 'imdb_id':
-                        return (
-                          <a
-                            className="pr-3"
-                            href={`https://www.imdb.com/title/${movieExternalIds[key]}`}
-                            target="_blank">
-                            <FontAwesomeIcon icon={['fab', 'imdb']} size="2x" />
-                          </a>
-                        )
-                      case 'facebook_id':
-                        return (
-                          <a
-                            className="pr-3"
-                            href={`https://www.facebook.com/${movieExternalIds[key]}`}
-                            target="_blank">
-                            <FontAwesomeIcon
-                              icon={['fab', 'facebook']}
-                              size="2x"
-                            />
-                          </a>
-                        )
-                      case 'instagram_id':
-                        return (
-                          <a
-                            className="pr-3"
-                            href={`https://www.instagram.com/${movieExternalIds[key]}`}
-                            target="_blank">
-                            <FontAwesomeIcon
-                              icon={['fab', 'instagram']}
-                              size="2x"
-                            />
-                          </a>
-                        )
-                      case 'twitter_id':
-                        return (
-                          <a
-                            className="pr-3"
-                            href={`https://twitter.com/${movieExternalIds[key]}`}
-                            target="_blank">
-                            <FontAwesomeIcon
-                              icon={['fab', 'twitter']}
-                              size="2x"
-                            />
-                          </a>
-                        )
+              <div className="flex justify-between">
+                <div className="flex">
+                  <button>
+                    <span className="pr-3">
+                      <FontAwesomeIcon icon="list" size="2x" />
+                    </span>
+                  </button>
+                  <button>
+                    <span className="pr-3">
+                      <FontAwesomeIcon icon="heart" size="2x" />
+                    </span>
+                  </button>
+                  <button>
+                    <FontAwesomeIcon icon="eye" size="2x" />
+                  </button>
+                </div>
+                <div>
+                  <a className="pr-3" href={movie.homepage} target="_blank">
+                    <FontAwesomeIcon icon="link" size="2x" />
+                  </a>
+                  {Object.keys(movieExternalIds).map(key => {
+                    if (movieExternalIds[key] !== null) {
+                      switch (key) {
+                        case 'imdb_id':
+                          return (
+                            <a
+                              className="pr-3"
+                              href={`https://www.imdb.com/title/${movieExternalIds[key]}`}
+                              target="_blank">
+                              <FontAwesomeIcon
+                                icon={['fab', 'imdb']}
+                                size="2x"
+                              />
+                            </a>
+                          )
+                        case 'facebook_id':
+                          return (
+                            <a
+                              className="pr-3"
+                              href={`https://www.facebook.com/${movieExternalIds[key]}`}
+                              target="_blank">
+                              <FontAwesomeIcon
+                                icon={['fab', 'facebook']}
+                                size="2x"
+                              />
+                            </a>
+                          )
+                        case 'instagram_id':
+                          return (
+                            <a
+                              className="pr-3"
+                              href={`https://www.instagram.com/${movieExternalIds[key]}`}
+                              target="_blank">
+                              <FontAwesomeIcon
+                                icon={['fab', 'instagram']}
+                                size="2x"
+                              />
+                            </a>
+                          )
+                        case 'twitter_id':
+                          return (
+                            <a
+                              className="pr-3"
+                              href={`https://twitter.com/${movieExternalIds[key]}`}
+                              target="_blank">
+                              <FontAwesomeIcon
+                                icon={['fab', 'twitter']}
+                                size="2x"
+                              />
+                            </a>
+                          )
+                      }
                     }
-                  }
-                })}
+                  })}
+                </div>
               </div>
             </div>
           </div>

@@ -32,6 +32,10 @@ h6 {
   @apply text-lg;
 }
 
+.h-screen-75 {
+  height: 75vh;
+}
+
 @import 'tailwindcss/components';
 
 @import 'tailwindcss/utilities';
