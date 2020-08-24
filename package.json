@@ -19,7 +19,7 @@
     "react-masonry-css": "^1.0.14",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "tailwindcss": "^1.6.0"
+    "tailwindcss": "^1.7.3"
   },
   "scripts": {
     "build:tailwind": "tailwind build src/assets/tailwind.css -o src/assets/tailwind.output.css",
