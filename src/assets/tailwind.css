@@ -36,6 +36,15 @@ h6 {
   height: 75vh;
 }
 
+.active_tab {
+  @apply border-b-2 border-custom-blue text-custom-blue;
+}
+
+.active_tab:hover,
+.tab:hover {
+  @apply border-custom-orange text-custom-orange;
+}
+
 @import 'tailwindcss/components';
 
 @import 'tailwindcss/utilities';

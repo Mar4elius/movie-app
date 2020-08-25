@@ -276,49 +276,61 @@ export default function MovieDetails() {
             </div>
           </div>
         </div>
-
-        <div className="w-full my-5">
-          <div className="flex">
-            <div className="w-2/5 border-r-2 border-sky-blue">
-              <div className="text-center">
-                <h2>Cast</h2>
-              </div>
+        {/* Casting  */}
+        <div className="flex w-full my-5">
+          <div className="w-2/5 border-r-2">
+            <div className="flex items-center justify-center min-h-full">
               <div className="flex flex-col">
-                <button onClick={() => setActiveCastTab('cast')}>
+                <h2 className="tracking-wider">Cast</h2>
+
+                <button
+                  className={activeCastTab === 'cast' ? `active_tab` : 'tab'}
+                  onClick={() => setActiveCastTab('cast')}>
                   Cast ({movieCast.cast.length})
                 </button>
-                <button onClick={() => setActiveCastTab('crew')}>
-                  Crew: ({movieCast.crew.length})
+
+                <button
+                  className={activeCastTab === 'crew' ? `active_tab` : 'tab'}
+                  onClick={() => setActiveCastTab('crew')}>
+                  Crew ({movieCast.crew.length})
                 </button>
               </div>
             </div>
-            <div className="w-full overflow-x-scroll">{castTabComponent()}</div>
           </div>
+          <div className="w-full overflow-x-scroll">{castTabComponent()}</div>
         </div>
-        <div className="w-full my-5">
-          <div className="flex">
-            <div className="w-2/5">
-              <div className="text-center">
-                <h2>Media</h2>
-              </div>
-
+        {/*  // Casting */}
+        {/* Media */}
+        <div className="flex w-full my-5">
+          <div className="w-2/5 border-r-2">
+            <div className="flex items-center justify-center min-h-full">
               <div className="flex flex-col">
-                <button onClick={() => setActiveMediaTab('screenshots')}>
+                <h2 className="tracking-wider">Media</h2>
+                <button
+                  className={
+                    activeMediaTab === 'screenshots' ? `active_tab` : 'tab'
+                  }
+                  onClick={() => setActiveMediaTab('screenshots')}>
                   Screenshots ({movieImages.backdrops.length})
                 </button>
-                <button onClick={() => setActiveMediaTab('videos')}>
+                <button
+                  className={activeMediaTab === 'videos' ? `active_tab` : 'tab'}
+                  onClick={() => setActiveMediaTab('videos')}>
                   Videos ({movieVideos.length})
                 </button>
-                <button onClick={() => setActiveMediaTab('posters')}>
+                <button
+                  className={
+                    activeMediaTab === 'posters' ? `active_tab` : 'tab'
+                  }
+                  onClick={() => setActiveMediaTab('posters')}>
                   Posters ({movieImages.posters.length})
                 </button>
               </div>
             </div>
-            <div className="w-full overflow-x-scroll">
-              {mediaTabComponent()}
-            </div>
           </div>
+          <div className="w-full overflow-x-scroll">{mediaTabComponent()}</div>
         </div>
+        {/* // Media */}
       </div>
     )
   } else {

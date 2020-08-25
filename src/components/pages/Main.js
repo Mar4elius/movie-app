@@ -93,18 +93,16 @@ export default function Main() {
         error={error?.response?.data}
       />
       <div className="w-full flex items-center justify-center align-top mb-6">
-        <h6 className="mr-5">Trending:</h6>
+        <h5 className="mr-5 font-bold">Trending:</h5>
         <button
-          className={`rounded-lg border-custom-blue border-2 p-1 mr-5 hover:bg-custom-orange hover:border-custom-orange ${
-            trendStatus === `week` ? 'bg-custom-blue' : ''
-          }`}
+          className={`${
+            trendStatus === `week` ? 'active_tab' : 'tab'
+          } mr-5 text-lg`}
           onClick={() => setTrendStatus('week')}>
           This Week
         </button>
         <button
-          className={`rounded-lg border-custom-blue border-2 p-1 hover:bg-custom-orange hover:border-custom-orange ${
-            trendStatus === `day` ? 'bg-custom-blue' : ''
-          }`}
+          className={`${trendStatus === `day` ? 'active_tab' : 'tab'} text-lg`}
           onClick={() => setTrendStatus('day')}>
           Today
         </button>
