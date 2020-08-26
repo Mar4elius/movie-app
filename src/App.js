@@ -12,17 +12,15 @@ function App() {
     <div className="flex flex-col w-full">
       <Layout>
         {/*  The <Route>‘s path is matched with the current location and a component gets rendered */}
-        <div className="w-5/6">
-          {routes.map(route => (
-            <Route
-              key={route.icon}
-              exact
-              path={route.path}
-              component={route.component}
-            />
-          ))}
-          <Route path="/movie/:id" component={MovieDetails} />
-        </div>
+        {routes.map(route => (
+          <Route
+            key={route.icon}
+            exact
+            path={route.path}
+            component={route.component}
+          />
+        ))}
+        <Route path="/movie/:id" component={MovieDetails} />
       </Layout>
     </div>
   )

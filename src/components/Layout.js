@@ -54,11 +54,13 @@ library.add(
 
 export default function Layout(props) {
   return (
-    <div className="flex flex-col w-full">
-      <TopBar />
-      <div className="w-full flex">
-        <Navigation />
+    <div className="flex flex-wrap">
+      <div className="w-5/6">
+        <TopBar />
         {props.children}
+      </div>
+      <div className="w-1/6">
+        <Navigation />
       </div>
     </div>
   )

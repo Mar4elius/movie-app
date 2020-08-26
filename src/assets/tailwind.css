@@ -37,7 +37,7 @@ h6 {
 }
 
 .active_tab {
-  @apply border-b-2 border-custom-pink text-custom-pink;
+  @apply border-b-2 border-custom-orange text-custom-orange;
 }
 
 .active_tab:hover,

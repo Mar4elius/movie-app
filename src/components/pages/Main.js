@@ -85,7 +85,7 @@ export default function Main() {
   }
 
   return (
-    <div>
+    <div className="w-full">
       <Alphabet handleOnClick={searchMovies} />
 
       <Errors
