@@ -147,14 +147,14 @@ export default function MovieDetails() {
     return (
       <div className="flex flex-wrap">
         <div className="w-full flex relative overflow-hidden">
-          <div className="w-full h-screen-75">
+          <div className="h-screen-75">
             <img
               className=" absolute left-0 top-0 w-full flex"
               src={`https://image.tmdb.org/t/p/w1280/${movieImages.backdrops[0].file_path}`}
             />
           </div>
-          <div className="w-4/5 absolute z-10 bg-gradient-to-r from-custom-grey h-full p-5">
-            <div className="w-1/2">
+          <div className="absolute z-10 bg-gradient-to-r from-custom-grey h-full flex justify-between w-full">
+            <div className="w-1/2 p-5">
               <div className="flex flex-col space-y-5">
                 <div className="flex">
                   <div className="w-full">
@@ -185,13 +185,6 @@ export default function MovieDetails() {
                     </button>
                   ))}
                 </div>
-
-                <div className="w-1/2 flex justify-end text-xl align-baseline">
-                  <FontAwesomeIcon icon="star" size="2x" />
-                  <span className="px-2">{movie.vote_average}</span>
-                  <FontAwesomeIcon icon="user-friends" size="2x" />
-                  <span className="pl-2">{movie.vote_count}</span>
-                </div>
                 {/* <div className="flex">
                   {[...Array(10)].map((e, i) => (
                     <span className="pr-3" key={i}>
@@ -205,7 +198,7 @@ export default function MovieDetails() {
                 </div>
               </div>
 
-              <div className="flex justify-between min-h-full items-end">
+              <div className="flex justify-between">
                 <div className="flex">
                   <button>
                     <span className="pr-3 text-custom-pink hover:text-custom-orange">
@@ -286,6 +279,12 @@ export default function MovieDetails() {
                   })}
                 </div>
               </div>
+            </div>
+            <div className="w-1/2 flex justify-end text-xl align-baseline text-custom-orange p-5">
+              <FontAwesomeIcon icon="star" size="2x" />
+              <span className="px-2">{movie.vote_average}</span>
+              <FontAwesomeIcon icon="user-friends" size="2x" />
+              <span className="pl-2">{movie.vote_count}</span>
             </div>
           </div>
         </div>
