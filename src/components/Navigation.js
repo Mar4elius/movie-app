@@ -9,7 +9,7 @@ import routes from 'assets/data/routes'
 
 export default function Navigation() {
   return (
-    <div className="w-1/6 bg-custom-grey max-h-full border-r-2 border-custom-blue">
+    <div className="w-1/6 bg-custom-grey max-h-full border-r-2 border-custom-pink">
       <nav className="fixed">
         <ul>
           {routes.map(route => {
@@ -18,10 +18,10 @@ export default function Navigation() {
                 {/* <Link/> is the element you could use to navigate through routes. */}
                 <Link to={route.path}>
                   <div className="flex justify-start">
-                    <span className="w-16 text-custom-blue hover:text-custom-orange flex justify-center">
+                    <span className="w-16 text-custom-pink hover:text-custom-orange flex justify-center">
                       <FontAwesomeIcon icon={route.icon} size="2x" />
                     </span>
-                    <div className="tracking-widest mx-5 text-custom-blue">
+                    <div className="tracking-widest mx-5 text-custom-pink">
                       <p>{route.name}</p>
                     </div>
                   </div>

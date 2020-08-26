@@ -53,12 +53,14 @@ export default function MovieDetails() {
             <div className="flex overflow-x-scroll">
               {movieVideos.map(video => {
                 return (
-                  <iframe
-                    key={video.key}
-                    className="m-2"
-                    width="420"
-                    height="315"
-                    src={`https://www.youtube.com/embed/${video.key}`}></iframe>
+                  <div className="w-full">
+                    <iframe
+                      key={video.key}
+                      className="m-2"
+                      width="420"
+                      height="315"
+                      src={`https://www.youtube.com/embed/${video.key}`}></iframe>
+                  </div>
                 )
               })}
             </div>
@@ -71,7 +73,7 @@ export default function MovieDetails() {
               {movieImages.posters.map(poster => {
                 return (
                   <img
-                    className="m-2"
+                    className="m-2 rounded-lg h-64"
                     src={`https://image.tmdb.org/t/p/w500/${poster.file_path}`}
                     key={poster.file_path}
                   />
@@ -87,7 +89,7 @@ export default function MovieDetails() {
             {movieImages.backdrops.map(image => {
               return (
                 <img
-                  className="m-2"
+                  className="m-2 rounded-lg"
                   src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
                   key={image.file_path}
                 />
@@ -108,6 +110,7 @@ export default function MovieDetails() {
                 <div className="">
                   <div className="bg-light-grey m-2 w-48">
                     <img
+                      className="rounded-lg"
                       src={`https://image.tmdb.org/t/p/w500/${crew.profile_path}`}
                     />
                     <p className="bold">{crew.name}</p>
@@ -126,6 +129,7 @@ export default function MovieDetails() {
                 <div className="">
                   <div className="bg-light-grey m-2 w-48">
                     <img
+                      className="rounded-lg"
                       src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
                     />
                     <p className="bold">{cast.name}</p>
@@ -158,8 +162,10 @@ export default function MovieDetails() {
                       {movie.title}
                       {` (${new Date(movie.release_date).getFullYear()})`}
                     </h2>
+                    <h6 className="italic">{movie?.tagline ?? ''}</h6>
                   </div>
                 </div>
+
                 <ul className="flex">
                   <li className="pr-3">{movie.release_date}</li>
                   <li className="pr-3">{movie.runtime} min</li>
@@ -169,52 +175,59 @@ export default function MovieDetails() {
                     </li>
                   ))}
                 </ul>
+
                 <div className="flex">
                   {movie.genres.map(genre => (
                     <button
-                      className="mr-3 p-2 bg-sky-blue text-center"
+                      className="mr-3 p-2 text-center tab"
                       key={genre.name}>
                       {genre.name}
                     </button>
                   ))}
                 </div>
+
                 <div className="w-1/2 flex justify-end text-xl align-baseline">
                   <FontAwesomeIcon icon="star" size="2x" />
                   <span className="px-2">{movie.vote_average}</span>
                   <FontAwesomeIcon icon="user-friends" size="2x" />
                   <span className="pl-2">{movie.vote_count}</span>
                 </div>
-                <div className="flex">
+                {/* <div className="flex">
                   {[...Array(10)].map((e, i) => (
                     <span className="pr-3" key={i}>
                       <FontAwesomeIcon icon="star" size="lg" />
                     </span>
                   ))}
-                </div>
-                <div className="my-5">
+                </div> */}
+                <div className="my-5 h-64">
                   <h2>Story</h2>
                   <p>{movie.overview}</p>
                 </div>
               </div>
 
-              <div className="flex justify-between">
+              <div className="flex justify-between min-h-full items-end">
                 <div className="flex">
                   <button>
-                    <span className="pr-3">
+                    <span className="pr-3 text-custom-pink hover:text-custom-orange">
                       <FontAwesomeIcon icon="list" size="2x" />
                     </span>
                   </button>
                   <button>
-                    <span className="pr-3">
+                    <span className="pr-3 text-custom-pink hover:text-custom-orange">
                       <FontAwesomeIcon icon="heart" size="2x" />
                     </span>
                   </button>
                   <button>
-                    <FontAwesomeIcon icon="eye" size="2x" />
+                    <span className="text-custom-pink hover:text-custom-orange">
+                      <FontAwesomeIcon icon="eye" size="2x" />
+                    </span>
                   </button>
                 </div>
                 <div>
-                  <a className="pr-3" href={movie.homepage} target="_blank">
+                  <a
+                    className="pr-3 text-custom-pink hover:text-custom-orange"
+                    href={movie.homepage}
+                    target="_blank">
                     <FontAwesomeIcon icon="link" size="2x" />
                   </a>
                   {Object.keys(movieExternalIds).map(key => {
@@ -223,7 +236,7 @@ export default function MovieDetails() {
                         case 'imdb_id':
                           return (
                             <a
-                              className="pr-3"
+                              className="pr-3 text-custom-pink hover:text-custom-orange"
                               href={`https://www.imdb.com/title/${movieExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon
@@ -235,7 +248,7 @@ export default function MovieDetails() {
                         case 'facebook_id':
                           return (
                             <a
-                              className="pr-3"
+                              className="pr-3 text-custom-pink hover:text-custom-orange"
                               href={`https://www.facebook.com/${movieExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon
@@ -247,7 +260,7 @@ export default function MovieDetails() {
                         case 'instagram_id':
                           return (
                             <a
-                              className="pr-3"
+                              className="pr-3 text-custom-pink hover:text-custom-orange"
                               href={`https://www.instagram.com/${movieExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon
@@ -259,7 +272,7 @@ export default function MovieDetails() {
                         case 'twitter_id':
                           return (
                             <a
-                              className="pr-3"
+                              className="pr-3 text-custom-pink hover:text-custom-orange"
                               href={`https://twitter.com/${movieExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon

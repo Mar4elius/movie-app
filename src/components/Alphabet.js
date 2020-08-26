@@ -21,7 +21,7 @@ export default function Alphabet(props) {
         {alphabet.map(symbol => {
           return (
             <li className="m-2" key={symbol} className="cursor-pointer">
-              <span className="text-custom-blue hover:text-custom-orange flex">
+              <span className="text-custom-dark-blue hover:text-custom-orange flex">
                 <button
                   onClick={e => setSelectedLetter(e.target.textContent)}
                   className=" transform hover:-translate-y-2 hover:font-bold">

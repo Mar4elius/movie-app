@@ -9,11 +9,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'custom-orange': '#E74C3C',
+        // 'custom-orange': '#73A1B0',
+        // 'custom-white': '#ECF0F1',
+        // 'custom-pink': '#FF7E57',
+        // 'custom-grey': '#3C3642',
+        // 'custom-dark-blue': '#87806D',
+        'custom-orange': '#ED6A40',
         'custom-white': '#ECF0F1',
-        'custom-blue': '#3498DB',
-        'custom-grey': '#B5B5B7',
-        'custom-dark-blue': '#2C3E50',
+        'custom-pink': '#FCB7A8',
+        'custom-grey': '#758086',
+        'custom-dark-blue': '#2B4448',
       },
     },
   },
