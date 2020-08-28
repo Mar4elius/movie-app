@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // Components
 import Loader from 'components/helpers/Loader'
+// Images
+import noFace from 'assets/images/no-face.png'
 
 export default function MovieDetails() {
   const { id: movieId } = useParams()
@@ -106,13 +108,27 @@ export default function MovieDetails() {
         return (
           <div className="flex">
             {movieCast.crew.map(crew => {
+              // check if image exists
+              let image = null
+              if (crew?.profile_path) {
+                image = (
+                  <img
+                    className="rounded-lg"
+                    src={`https://image.tmdb.org/t/p/w500/${crew.profile_path}`}
+                  />
+                )
+              } else {
+                image = (
+                  <div className="pt-12">
+                    <img className="rounded-lg " src={noFace} />
+                    <p className="text-center">NO IMAGE</p>
+                  </div>
+                )
+              }
               return (
                 <div className="">
                   <div className="bg-light-grey m-2 w-48">
-                    <img
-                      className="rounded-lg"
-                      src={`https://image.tmdb.org/t/p/w500/${crew.profile_path}`}
-                    />
+                    {image}
                     <p className="bold">{crew.name}</p>
                     <p>{crew.job}</p>
                   </div>
@@ -123,15 +139,30 @@ export default function MovieDetails() {
         )
       default:
         return (
-          <div className="flex">
+          <div className="flex h-full">
             {movieCast.cast.map(cast => {
+              // check if image exists
+              let image = null
+              if (cast?.profile_path) {
+                image = (
+                  <img
+                    className="rounded-lg"
+                    src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
+                  />
+                )
+              } else {
+                image = (
+                  <div className="pt-12">
+                    <img className="rounded-lg " src={noFace} />
+                    <p className="text-center">NO IMAGE</p>
+                  </div>
+                )
+              }
+              // \\ check if image exists
               return (
-                <div className="">
+                <div className="min-h-full">
                   <div className="bg-light-grey m-2 w-48">
-                    <img
-                      className="rounded-lg"
-                      src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
-                    />
+                    {image}
                     <p className="bold">{cast.name}</p>
                     <p>{`(${cast.character})`}</p>
                   </div>
@@ -149,7 +180,7 @@ export default function MovieDetails() {
         <div className="w-full flex relative overflow-hidden">
           <div className="h-screen-75">
             <img
-              className=" absolute left-0 top-0 w-full flex"
+              className="absolute left-0 top-0 w-full flex"
               src={`https://image.tmdb.org/t/p/w1280/${movieImages.backdrops[0].file_path}`}
             />
           </div>
