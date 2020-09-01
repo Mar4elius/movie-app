@@ -23,7 +23,7 @@ import {
   faLink,
   faList,
   faEye,
-  faEnvelope,
+  faDoorOpen,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -52,7 +52,8 @@ library.add(
   faTwitter,
   faLink,
   faList,
-  faEye
+  faEye,
+  faDoorOpen
 )
 
 export default function Layout(props) {
@@ -66,15 +67,19 @@ export default function Layout(props) {
     setShowModal(false)
   }
 
+  function resetState() {
+    setShowModal(true)
+    setSessionId(null)
+    setActiveAccount(null)
+  }
+
   useEffect(() => {
-    console.log(sessionId)
     API.get('/account', {
       params: {
         api_key: process.env.REACT_APP_TMDB_API_KEY,
         session_id: sessionId,
       },
     }).then(response => {
-      console.log(response)
       setActiveAccount(response.data)
     })
   }, [sessionId])
@@ -87,7 +92,11 @@ export default function Layout(props) {
         {props.children}
       </div>
       <div className="w-1/6">
-        <Navigation activeAccount={activeAccount} />
+        <Navigation
+          activeAccount={activeAccount}
+          sessionId={sessionId}
+          onLogoutClick={resetState}
+        />
       </div>
     </div>
   )

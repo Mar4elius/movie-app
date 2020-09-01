@@ -37,6 +37,12 @@ const routes = [
     path: '/random',
     component: 'Random',
   },
+  {
+    icon: 'door-open',
+    name: 'Logout',
+    path: null,
+    component: null,
+  },
 ]
 
 export default routes
