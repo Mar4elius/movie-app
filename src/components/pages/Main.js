@@ -9,7 +9,6 @@ import Errors from 'components/helpers/Errors'
 import MovieCard from 'components/helpers/MovieCard'
 import Loader from 'components/helpers/Loader'
 import Pagination from 'components/helpers/Pagination'
-import WelcomeModal from 'components/modals/WelcomeModal'
 
 export default function Main() {
   // State variables
@@ -87,7 +86,6 @@ export default function Main() {
 
   return (
     <div className="w-full">
-      <WelcomeModal></WelcomeModal>
       <Alphabet handleOnClick={searchMovies} />
 
       <Errors

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 // Components
 import TopBar from 'components/TopBar'
 import Navigation from 'components/Navigation'
+import WelcomeModal from 'components/modals/WelcomeModal'
 // Support
 import { library } from '@fortawesome/fontawesome-svg-core'
+import API from 'api/api'
 
 import {
   faUser,
@@ -21,6 +23,7 @@ import {
   faLink,
   faList,
   faEye,
+  faEnvelope,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -53,14 +56,38 @@ library.add(
 )
 
 export default function Layout(props) {
+  const [showModal, setShowModal] = useState(true)
+  const [sessionId, setSessionId] = useState(
+    sessionStorage.getItem('sessionId')
+  )
+  const [activeAccount, setActiveAccount] = useState(null)
+
+  if (sessionId && showModal) {
+    setShowModal(false)
+  }
+
+  useEffect(() => {
+    console.log(sessionId)
+    API.get('/account', {
+      params: {
+        api_key: process.env.REACT_APP_TMDB_API_KEY,
+        session_id: sessionId,
+      },
+    }).then(response => {
+      console.log(response)
+      setActiveAccount(response.data)
+    })
+  }, [sessionId])
+
   return (
     <div className="flex flex-wrap">
+      <WelcomeModal showModal={showModal} setSessionId={setSessionId} />
       <div className="w-5/6">
-        <TopBar />
+        <TopBar activeAccount={activeAccount} />
         {props.children}
       </div>
       <div className="w-1/6">
-        <Navigation />
+        <Navigation activeAccount={activeAccount} />
       </div>
     </div>
   )

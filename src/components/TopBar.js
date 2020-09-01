@@ -1,8 +1,7 @@
 import React from 'react'
 
-export default function TopBar() {
+export default function TopBar(props) {
   function handleOnBlur(e) {}
-
   return (
     <div className="flex justify-around h-24 bg-custom-grey items-center border-b-2 border-custom-pink">
       <input
@@ -11,7 +10,10 @@ export default function TopBar() {
         className="border-2 border-custom-pink h-12 p-2 w-64 rounded-lg"
         onBlur={handleOnBlur}
       />
-      <p>You are logged in as: Mara</p>
+      <p>
+        Hello,{' '}
+        {props.activeAccount?.name || props.activeAccount?.username || 'Guest'}
+      </p>
     </div>
   )
 }
