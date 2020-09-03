@@ -19,6 +19,17 @@ export default function WelcomeModal(props) {
     })
   }
 
+  async function loginAsGuest() {
+    await API.get('/authentication/guest_session/new', {
+      params: {
+        api_key: process.env.REACT_APP_TMDB_API_KEY,
+      },
+    }).then(response => {
+      sessionStorage.setItem('guestSessionId', response.data.guest_session_id)
+      props.setGuestSessionId(response.data.guest_session_id)
+    })
+  }
+
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search)
     if (queryParams.has('approved') && queryParams.get('approved') === 'true') {
@@ -50,9 +61,7 @@ export default function WelcomeModal(props) {
           classes="inputClasses">
           Login
         </StyledButton>
-        <StyledButton
-          handleOnClick={getAuthenticationToken}
-          classes="inputClasses">
+        <StyledButton handleOnClick={loginAsGuest} classes="inputClasses">
           Proceed as Guest
         </StyledButton>
       </div>

@@ -61,9 +61,12 @@ export default function Layout(props) {
   const [sessionId, setSessionId] = useState(
     sessionStorage.getItem('sessionId')
   )
+  const [guestSessionId, setGuestSessionId] = useState(
+    sessionStorage.getItem('guestSessionId')
+  )
   const [activeAccount, setActiveAccount] = useState(null)
 
-  if (sessionId && showModal) {
+  if ((sessionId || guestSessionId) && showModal) {
     setShowModal(false)
   }
 
@@ -86,7 +89,11 @@ export default function Layout(props) {
 
   return (
     <div className="flex flex-wrap">
-      <WelcomeModal showModal={showModal} setSessionId={setSessionId} />
+      <WelcomeModal
+        showModal={showModal}
+        setSessionId={setSessionId}
+        setGuestSessionId={setGuestSessionId}
+      />
       <div className="w-5/6">
         <TopBar activeAccount={activeAccount} />
         {props.children}
