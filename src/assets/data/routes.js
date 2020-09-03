@@ -1,4 +1,5 @@
 import Main from 'components/pages/Main'
+import FavoriteList from 'components/pages/FavoriteList'
 
 const routes = [
   {
@@ -22,8 +23,8 @@ const routes = [
   {
     icon: 'heart',
     name: 'Favorites',
-    path: 'favorite',
-    component: 'Favorites',
+    path: '/favorite-list',
+    component: FavoriteList,
   },
   {
     icon: 'random',
