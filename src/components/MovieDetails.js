@@ -232,24 +232,24 @@ export default function MovieDetails() {
               <div className="flex justify-between">
                 <div className="flex">
                   <button>
-                    <span className="pr-3 text-custom-pink hover:text-custom-orange">
+                    <span className="pr-3 text-custom-blue hover:text-custom-orange">
                       <FontAwesomeIcon icon="list" size="2x" />
                     </span>
                   </button>
                   <button>
-                    <span className="pr-3 text-custom-pink hover:text-custom-orange">
+                    <span className="pr-3 text-custom-blue hover:text-custom-orange">
                       <FontAwesomeIcon icon="heart" size="2x" />
                     </span>
                   </button>
                   <button>
-                    <span className="text-custom-pink hover:text-custom-orange">
+                    <span className="text-custom-blue hover:text-custom-orange">
                       <FontAwesomeIcon icon="eye" size="2x" />
                     </span>
                   </button>
                 </div>
                 <div>
                   <a
-                    className="pr-3 text-custom-pink hover:text-custom-orange"
+                    className="pr-3 text-custom-blue hover:text-custom-orange"
                     href={movie.homepage}
                     target="_blank">
                     <FontAwesomeIcon icon="link" size="2x" />
@@ -260,7 +260,7 @@ export default function MovieDetails() {
                         case 'imdb_id':
                           return (
                             <a
-                              className="pr-3 text-custom-pink hover:text-custom-orange"
+                              className="pr-3 text-custom-blue hover:text-custom-orange"
                               href={`https://www.imdb.com/title/${movieExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon
@@ -272,7 +272,7 @@ export default function MovieDetails() {
                         case 'facebook_id':
                           return (
                             <a
-                              className="pr-3 text-custom-pink hover:text-custom-orange"
+                              className="pr-3 text-custom-blue hover:text-custom-orange"
                               href={`https://www.facebook.com/${movieExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon
@@ -284,7 +284,7 @@ export default function MovieDetails() {
                         case 'instagram_id':
                           return (
                             <a
-                              className="pr-3 text-custom-pink hover:text-custom-orange"
+                              className="pr-3 text-custom-blue hover:text-custom-orange"
                               href={`https://www.instagram.com/${movieExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon
@@ -296,7 +296,7 @@ export default function MovieDetails() {
                         case 'twitter_id':
                           return (
                             <a
-                              className="pr-3 text-custom-pink hover:text-custom-orange"
+                              className="pr-3 text-custom-blue hover:text-custom-orange"
                               href={`https://twitter.com/${movieExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon
@@ -379,7 +379,7 @@ export default function MovieDetails() {
   } else {
     return (
       <Loader
-        classes="text-sky-blue opacity-100"
+        classes="text-custom-orange opacity-100"
         isSpinning={isLoading}
         size="3x"
         icon="circle-notch"

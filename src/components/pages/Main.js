@@ -115,7 +115,7 @@ export default function Main() {
       </div>
 
       <Loader
-        classes="text-sky-blue opacity-100"
+        classes="text-custom-orange opacity-100"
         isSpinning={isLoading}
         size="3x"
         icon="circle-notch"

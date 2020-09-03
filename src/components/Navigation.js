@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 // Support
 import API from 'api/api'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 // Data
 import routes from 'assets/data/routes'
 // Image
@@ -25,7 +25,7 @@ export default function Navigation(props) {
   }
 
   return (
-    <div className="min-h-full border-l-2 border-custom-pink">
+    <div className="min-h-full border-l-2 border-custom-blue">
       <div className="fixed">
         <div className="w-full flex justify-center items-center">
           <a href="https://www.themoviedb.org" target="_blank">
@@ -34,21 +34,31 @@ export default function Navigation(props) {
         </div>
         <nav>
           <ul>
+            <li className="m-5 cursor-pointer">
+              <div className="flex justify-start">
+                <span className="w-full text-custom-blue hover:text-custom-orange flex justify-center">
+                  <FontAwesomeIcon icon="caret-right" size="3x" />
+                </span>
+              </div>
+            </li>
             {routes.map(route => {
               if (route.name !== 'Logout') {
                 return (
-                  <li className="m-5 cursor-pointer " key={route.icon}>
+                  <li className="m-5 cursor-pointer" key={route.icon}>
                     {/* <Link/> is the element you could use to navigate through routes. */}
-                    <Link to={route.path}>
-                      <div className="flex justify-start">
-                        <span className="w-16 text-custom-pink hover:text-custom-orange flex justify-center">
+                    <NavLink
+                      to={route.path}
+                      className="text-custom-blue"
+                      activeClassName="text-custom-orange">
+                      <div className="flex justify-start hover:text-custom-orange">
+                        <div className="w-16 flex justify-center">
                           <FontAwesomeIcon icon={route.icon} size="2x" />
-                        </span>
-                        <div className="tracking-widest mx-5 text-custom-pink">
+                        </div>
+                        <div className="tracking-widest mx-5">
                           <p>{route.name}</p>
                         </div>
                       </div>
-                    </Link>
+                    </NavLink>
                   </li>
                 )
               } else if (activeAccount.account?.id) {
@@ -57,11 +67,11 @@ export default function Navigation(props) {
                     className="m-5 cursor-pointer "
                     key={route.icon}
                     onClick={logout}>
-                    <div className="flex justify-start">
-                      <span className="w-16 text-custom-pink hover:text-custom-orange flex justify-center">
+                    <div className="flex justify-start text-custom-blue hover:text-custom-orange">
+                      <div className="w-16 flex justify-center">
                         <FontAwesomeIcon icon={route.icon} size="2x" />
-                      </span>
-                      <div className="tracking-widest mx-5 text-custom-pink">
+                      </div>
+                      <div className="tracking-widest mx-5">
                         <p>{route.name}</p>
                       </div>
                     </div>

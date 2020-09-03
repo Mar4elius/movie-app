@@ -9,9 +9,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'custom-orange': '#ED6A40',
+        'custom-orange': '#F95700FF',
         'custom-white': '#ECF0F1',
-        'custom-pink': '#FCB7A8',
+        'custom-blue': '#00A4CCFF',
         'custom-grey': '#758086',
         'custom-dark-blue': '#2B4448',
       },

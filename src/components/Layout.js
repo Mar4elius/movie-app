@@ -25,6 +25,8 @@ import {
   faList,
   faEye,
   faDoorOpen,
+  faCaretLeft,
+  faCaretRight,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -54,7 +56,9 @@ library.add(
   faLink,
   faList,
   faEye,
-  faDoorOpen
+  faDoorOpen,
+  faCaretLeft,
+  faCaretRight
 )
 
 export default function Layout(props) {

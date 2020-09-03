@@ -5,12 +5,12 @@ export default function TopBar() {
   const activeAccount = useContext(RootContext)
   function handleOnBlur(e) {}
   return (
-    <div className="flex justify-around h-24 bg-custom-grey items-center border-b-2 border-custom-pink">
+    <div className="flex justify-around h-24 bg-custom-grey bg-opacity-50 items-center border-b-2 border-custom-blue">
       <div className="w-2/3 flex justify-end">
         <input
           type="text"
           placeholder="Enter some letters..."
-          className="border-2 border-custom-pink h-12 p-2 w-64 rounded-lg"
+          className="border-2 border-custom-blue h-12 p-2 w-64 rounded-lg"
           onBlur={handleOnBlur}
         />
       </div>
