@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { RootContext } from './context/RootContext'
 
-export default function TopBar(props) {
+export default function TopBar() {
+  const activeAccount = useContext(RootContext)
   function handleOnBlur(e) {}
   return (
     <div className="flex justify-around h-24 bg-custom-grey items-center border-b-2 border-custom-pink">
@@ -14,14 +16,11 @@ export default function TopBar(props) {
       </div>
       <div className="flex justify-end w-1/2 items-center">
         <p className="mr-3">
-          Hello,{' '}
-          {props.activeAccount?.name ||
-            props.activeAccount?.username ||
-            'Guest'}
+          Hello, {activeAccount?.name || activeAccount?.username || 'Guest'}
         </p>
         <img
           className="mr-3 rounded-full"
-          src={`https://secure.gravatar.com/avatar/${props.activeAccount?.avatar.gravatar.hash}.jpg?s=64`}
+          src={`https://secure.gravatar.com/avatar/${activeAccount?.avatar.gravatar.hash}.jpg?s=64`}
         />
       </div>
     </div>

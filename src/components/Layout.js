@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import TopBar from 'components/TopBar'
 import Navigation from 'components/Navigation'
 import WelcomeModal from 'components/modals/WelcomeModal'
+import RootContext from 'components/context/RootContext'
 // Support
 import { library } from '@fortawesome/fontawesome-svg-core'
 import API from 'api/api'
@@ -94,17 +95,15 @@ export default function Layout(props) {
         setSessionId={setSessionId}
         setGuestSessionId={setGuestSessionId}
       />
-      <div className="w-5/6">
-        <TopBar activeAccount={activeAccount} />
-        {props.children}
-      </div>
-      <div className="w-1/6">
-        <Navigation
-          activeAccount={activeAccount}
-          sessionId={sessionId}
-          onLogoutClick={resetState}
-        />
-      </div>
+      <RootContext activeAccount={activeAccount}>
+        <div className="w-5/6">
+          <TopBar />
+          {props.children}
+        </div>
+        <div className="w-1/6">
+          <Navigation sessionId={sessionId} onLogoutClick={resetState} />
+        </div>
+      </RootContext>
     </div>
   )
 }

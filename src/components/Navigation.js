@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 // Support
 import API from 'api/api'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,8 +7,11 @@ import { Link } from 'react-router-dom'
 import routes from 'assets/data/routes'
 // Image
 import tmdb from 'assets/images/tmdb.svg'
+import { RootContext } from './context/RootContext'
 
 export default function Navigation(props) {
+  const activeAccount = useContext(RootContext)
+
   function logout() {
     API.delete('/authentication/session', {
       params: {
@@ -48,7 +51,7 @@ export default function Navigation(props) {
                     </Link>
                   </li>
                 )
-              } else if (props.activeAccount?.id) {
+              } else if (activeAccount?.id) {
                 return (
                   <li
                     className="m-5 cursor-pointer "
