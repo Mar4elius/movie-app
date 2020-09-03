@@ -8,16 +8,10 @@ const routes = [
     component: Main,
   },
   {
-    icon: 'user',
-    name: 'Profile',
-    path: '/user',
-    component: 'Profile',
-  },
-  {
     icon: 'video',
-    name: 'My Video',
-    path: '/my-video',
-    component: 'MyVideo',
+    name: 'Watch List',
+    path: '/watch-list',
+    component: 'WatchList',
   },
   {
     icon: 'layer-group',

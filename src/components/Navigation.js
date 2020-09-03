@@ -22,7 +22,7 @@ export default function Navigation(props) {
   }
 
   return (
-    <div className="min-h-full bg-custom-grey border-l-2 border-custom-pink">
+    <div className="min-h-full border-l-2 border-custom-pink">
       <div className="fixed">
         <div className="w-full flex justify-center items-center">
           <a href="https://www.themoviedb.org" target="_blank">
