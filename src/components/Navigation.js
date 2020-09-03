@@ -16,7 +16,7 @@ export default function Navigation(props) {
     API.delete('/authentication/session', {
       params: {
         api_key: process.env.REACT_APP_TMDB_API_KEY,
-        session_id: props.sessionId,
+        session_id: activeAccount.sessionId,
       },
     }).then(response => {
       sessionStorage.clear()
@@ -51,7 +51,7 @@ export default function Navigation(props) {
                     </Link>
                   </li>
                 )
-              } else if (activeAccount?.id) {
+              } else if (activeAccount.account?.id) {
                 return (
                   <li
                     className="m-5 cursor-pointer "

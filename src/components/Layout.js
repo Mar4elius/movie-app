@@ -95,7 +95,7 @@ export default function Layout(props) {
         setSessionId={setSessionId}
         setGuestSessionId={setGuestSessionId}
       />
-      <RootContext activeAccount={activeAccount}>
+      <RootContext activeAccount={activeAccount} sessionId={sessionId}>
         <div className="w-5/6">
           <TopBar />
           {props.children}

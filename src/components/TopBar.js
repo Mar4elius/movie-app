@@ -16,11 +16,14 @@ export default function TopBar() {
       </div>
       <div className="flex justify-end w-1/2 items-center">
         <p className="mr-3">
-          Hello, {activeAccount?.name || activeAccount?.username || 'Guest'}
+          Hello,{' '}
+          {activeAccount.account?.name ||
+            activeAccount.account?.username ||
+            'Guest'}
         </p>
         <img
           className="mr-3 rounded-full"
-          src={`https://secure.gravatar.com/avatar/${activeAccount?.avatar.gravatar.hash}.jpg?s=64`}
+          src={`https://secure.gravatar.com/avatar/${activeAccount.account?.avatar.gravatar.hash}.jpg?s=64`}
         />
       </div>
     </div>
