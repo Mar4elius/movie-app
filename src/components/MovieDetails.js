@@ -8,7 +8,7 @@ import Loader from 'components/helpers/Loader'
 // Images
 import noFace from 'assets/images/no-face.png'
 
-export default function MovieDetails() {
+export default function MovieDetails(props) {
   const { id: movieId } = useParams()
 
   const [movie, setMovie] = useState(null)
@@ -24,7 +24,8 @@ export default function MovieDetails() {
   const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
     setIsLoading(true)
-    API.get(`/movie/${movieId}`, {
+    const id = movieId ?? props.movie?.id
+    API.get(`/movie/${id}`, {
       params: {
         api_key: process.env.REACT_APP_TMDB_API_KEY,
         append_to_response: 'images,videos,external_ids,credits,reviews',
