@@ -67,23 +67,26 @@ export default function FavoriteList() {
     )
   } else {
     return (
-      <div className="w-full">
+      <div className="w-full mt-3">
         <div className="flex overflow-x-scroll">
           {favoriteMoviesList.map(movie => {
             return (
-              //   <div className="m-5 cursor-pointer">
-              <img
-                className="rounded-lg m-5 h-64"
-                onClick={() => setSelectedMovie(movie)}
-                src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
-                key={movie.id}
-              />
-              // <p className="text-center mt-2">{movie.title}</p>
-              //   </div>
+              <div className="m-3">
+                <div
+                  key={movie.id}
+                  className=" w-48 transform easy-in duration-100 hover:-translate-y-1 hover:scale-110">
+                  <img
+                    className="rounded-lg min-w-full"
+                    onClick={() => setSelectedMovie(movie)}
+                    src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                  />
+                  <p className="text-center mt-2">{movie.title}</p>
+                </div>
+              </div>
             )
           })}
         </div>
-        {/* <div className="w-full flex justify-center">{movieDetails()}</div> */}
+        <div className="mt-10">{movieDetails()}</div>
       </div>
     )
   }
