@@ -46,7 +46,7 @@ export default function MovieDetails(props) {
         console.log(error)
       }
     )
-  }, [])
+  }, [movie])
 
   const mediaTabComponent = _ => {
     switch (activeMediaTab) {
