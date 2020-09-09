@@ -22,7 +22,9 @@ export default function MovieDetails(props) {
   const [activeCastTab, setActiveCastTab] = useState('cast')
 
   const [isLoading, setIsLoading] = useState(false)
+
   useEffect(() => {
+    console.log('hello')
     setIsLoading(true)
     const id = movieId ?? props.movie?.id
     API.get(`/movie/${id}`, {
@@ -46,7 +48,7 @@ export default function MovieDetails(props) {
         console.log(error)
       }
     )
-  }, [movie])
+  }, [movieId, props.movie])
 
   const mediaTabComponent = _ => {
     switch (activeMediaTab) {
@@ -127,7 +129,7 @@ export default function MovieDetails(props) {
                 )
               }
               return (
-                <div className="">
+                <div className="" key={crew.id}>
                   <div className="bg-light-grey m-2 w-48">
                     {image}
                     <p className="bold">{crew.name}</p>
@@ -161,7 +163,7 @@ export default function MovieDetails(props) {
               }
               // \\ check if image exists
               return (
-                <div className="min-h-full">
+                <div className="min-h-full" key={cast.id}>
                   <div className="bg-light-grey m-2 w-48">
                     {image}
                     <p className="bold">{cast.name}</p>
@@ -261,6 +263,7 @@ export default function MovieDetails(props) {
                         case 'imdb_id':
                           return (
                             <a
+                              key={key}
                               className="pr-3 text-custom-blue hover:text-custom-orange"
                               href={`https://www.imdb.com/title/${movieExternalIds[key]}`}
                               target="_blank">
@@ -273,6 +276,7 @@ export default function MovieDetails(props) {
                         case 'facebook_id':
                           return (
                             <a
+                              key={key}
                               className="pr-3 text-custom-blue hover:text-custom-orange"
                               href={`https://www.facebook.com/${movieExternalIds[key]}`}
                               target="_blank">
@@ -285,6 +289,7 @@ export default function MovieDetails(props) {
                         case 'instagram_id':
                           return (
                             <a
+                              key={key}
                               className="pr-3 text-custom-blue hover:text-custom-orange"
                               href={`https://www.instagram.com/${movieExternalIds[key]}`}
                               target="_blank">
@@ -297,6 +302,7 @@ export default function MovieDetails(props) {
                         case 'twitter_id':
                           return (
                             <a
+                              key={key}
                               className="pr-3 text-custom-blue hover:text-custom-orange"
                               href={`https://twitter.com/${movieExternalIds[key]}`}
                               target="_blank">
