@@ -9,14 +9,13 @@ import Loader from 'components/helpers/Loader'
 import noFace from 'assets/images/no-face.png'
 
 export default function MovieDetails(props) {
-  const { id: movieId } = useParams()
+  const { id: tvShowId } = useParams()
 
-  const [movie, setMovie] = useState(null)
-  const [movieImages, setMovieImages] = useState(null)
-  const [movieVideos, setMovieVideos] = useState(null)
-  const [movieExternalIds, setMovieExternalIds] = useState(null)
-  const [movieCast, setMovieCast] = useState(null)
-  const [movieReviews, setMovieReviews] = useState(null)
+  const [tvShow, setTvShow] = useState(null)
+  const [tvShowImages, setTvShowImages] = useState(null)
+  const [tvShowVideos, setTvShowVideos] = useState(null)
+  const [tvShowExternalIds, setTvShowExternalIds] = useState(null)
+  const [tvShowCast, setTvShowCast] = useState(null)
 
   const [activeMediaTab, setActiveMediaTab] = useState('screenshots')
   const [activeCastTab, setActiveCastTab] = useState('cast')
@@ -25,8 +24,8 @@ export default function MovieDetails(props) {
 
   useEffect(() => {
     setIsLoading(true)
-    const id = movieId ?? props.movie?.id
-    API.get(`/movie/${id}`, {
+    const id = tvShowId ?? props.tvShow?.id
+    API.get(`/tv/${id}`, {
       params: {
         api_key: process.env.REACT_APP_TMDB_API_KEY,
         append_to_response: 'images,videos,external_ids,credits,reviews',
@@ -35,11 +34,12 @@ export default function MovieDetails(props) {
     }).then(
       response => {
         const { images, videos, external_ids, credits } = response.data
-        setMovie(response.data)
-        setMovieImages(images)
-        setMovieVideos(videos.results)
-        setMovieExternalIds(external_ids)
-        setMovieCast(credits)
+        console.log(response.data)
+        setTvShow(response.data)
+        setTvShowImages(images)
+        setTvShowVideos(videos.results)
+        setTvShowExternalIds(external_ids)
+        setTvShowCast(credits)
         setIsLoading(false)
       },
       error => {
@@ -47,7 +47,7 @@ export default function MovieDetails(props) {
         console.log(error)
       }
     )
-  }, [movieId, props.movie])
+  }, [tvShowId, props.tvShow])
 
   const mediaTabComponent = _ => {
     switch (activeMediaTab) {
@@ -55,7 +55,7 @@ export default function MovieDetails(props) {
         return (
           <div className="w-full">
             <div className="flex overflow-x-scroll">
-              {movieVideos.map(video => {
+              {tvShowVideos.map(video => {
                 return (
                   <div className="w-full">
                     <iframe
@@ -74,7 +74,7 @@ export default function MovieDetails(props) {
         return (
           <div className="w-full">
             <div className="flex overflow-x-scroll">
-              {movieImages.posters.map(poster => {
+              {tvShowImages.posters.map(poster => {
                 return (
                   <img
                     className="m-2 rounded-lg h-64"
@@ -90,7 +90,7 @@ export default function MovieDetails(props) {
       default:
         return (
           <div className="flex">
-            {movieImages.backdrops.map(image => {
+            {tvShowImages.backdrops.map(image => {
               return (
                 <img
                   className="m-2 rounded-lg"
@@ -109,7 +109,7 @@ export default function MovieDetails(props) {
       case 'crew':
         return (
           <div className="flex">
-            {movieCast.crew.map(crew => {
+            {tvShowCast.crew.map(crew => {
               // check if image exists
               let image = null
               if (crew?.profile_path) {
@@ -142,7 +142,7 @@ export default function MovieDetails(props) {
       default:
         return (
           <div className="flex h-full">
-            {movieCast.cast.map(cast => {
+            {tvShowCast.cast.map(cast => {
               // check if image exists
               let image = null
               if (cast?.profile_path) {
@@ -176,14 +176,20 @@ export default function MovieDetails(props) {
     }
   }
 
-  if (movie && movieImages && movieVideos && movieExternalIds && movieCast) {
+  if (
+    tvShow &&
+    tvShowImages &&
+    tvShowVideos &&
+    tvShowExternalIds &&
+    tvShowCast
+  ) {
     return (
       <div className="flex flex-wrap">
         <div className="w-full flex relative overflow-hidden">
           <div className="h-screen-75">
             <img
               className="absolute left-0 top-0 w-full flex"
-              src={`https://image.tmdb.org/t/p/w1280/${movieImages.backdrops[0].file_path}`}
+              src={`https://image.tmdb.org/t/p/w1280/${tvShowImages.backdrops[0].file_path}`}
             />
           </div>
           <div className="absolute z-10 bg-gradient-to-r from-custom-grey h-full flex justify-between w-full">
@@ -192,25 +198,35 @@ export default function MovieDetails(props) {
                 <div className="flex">
                   <div className="w-full">
                     <h2>
-                      {movie.title}
-                      {` (${new Date(movie.release_date).getFullYear()})`}
+                      {tvShow.name}
+                      {` (${new Date(
+                        tvShow.first_air_date
+                      ).getFullYear()} - ${new Date(
+                        tvShow.last_air_date
+                      ).getFullYear()})`}
                     </h2>
-                    <h6 className="italic">{movie?.tagline ?? ''}</h6>
                   </div>
                 </div>
 
                 <ul className="flex">
-                  <li className="pr-3">{movie.release_date}</li>
-                  <li className="pr-3">{movie.runtime} min</li>
-                  {movie.production_countries.map(country => (
+                  <li className="pr-3">{tvShow.first_air_date}</li>
+                  <li className="pr-3">
+                    {`${tvShow.episode_run_time} min. per episode`}{' '}
+                  </li>
+                  {tvShow.origin_country.map(country => (
                     <li key={country.name} className="pr-3">
                       {country.name}
                     </li>
                   ))}
                 </ul>
 
+                <ul className="flex">
+                  <li className="pr-3">{`Seasons count: ${tvShow.number_of_seasons}`}</li>
+                  <li className="pr-3">{`Episodes count: ${tvShow.number_of_episodes}`}</li>
+                </ul>
+
                 <div className="flex">
-                  {movie.genres.map(genre => (
+                  {tvShow.genres.map(genre => (
                     <button
                       className="mr-3 p-2 text-center tab"
                       key={genre.name}>
@@ -218,7 +234,6 @@ export default function MovieDetails(props) {
                     </button>
                   ))}
                 </div>
-
                 <div className="flex">
                   {[...Array(10)].map((e, i) => (
                     <span className="pr-3" key={i}>
@@ -228,7 +243,7 @@ export default function MovieDetails(props) {
                 </div>
                 <div className="my-5 h-64">
                   <h2>Story</h2>
-                  <p>{movie.overview}</p>
+                  <p>{tvShow.overview}</p>
                 </div>
               </div>
 
@@ -253,19 +268,19 @@ export default function MovieDetails(props) {
                 <div>
                   <a
                     className="pr-3 text-custom-blue hover:text-custom-orange"
-                    href={movie.homepage}
+                    href={tvShow.homepage}
                     target="_blank">
                     <FontAwesomeIcon icon="link" size="2x" />
                   </a>
-                  {Object.keys(movieExternalIds).map(key => {
-                    if (movieExternalIds[key] !== null) {
+                  {Object.keys(tvShowExternalIds).map(key => {
+                    if (tvShowExternalIds[key] !== null) {
                       switch (key) {
                         case 'imdb_id':
                           return (
                             <a
                               key={key}
                               className="pr-3 text-custom-blue hover:text-custom-orange"
-                              href={`https://www.imdb.com/title/${movieExternalIds[key]}`}
+                              href={`https://www.imdb.com/title/${tvShowExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon
                                 icon={['fab', 'imdb']}
@@ -278,7 +293,7 @@ export default function MovieDetails(props) {
                             <a
                               key={key}
                               className="pr-3 text-custom-blue hover:text-custom-orange"
-                              href={`https://www.facebook.com/${movieExternalIds[key]}`}
+                              href={`https://www.facebook.com/${tvShowExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon
                                 icon={['fab', 'facebook']}
@@ -291,7 +306,7 @@ export default function MovieDetails(props) {
                             <a
                               key={key}
                               className="pr-3 text-custom-blue hover:text-custom-orange"
-                              href={`https://www.instagram.com/${movieExternalIds[key]}`}
+                              href={`https://www.instagram.com/${tvShowExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon
                                 icon={['fab', 'instagram']}
@@ -304,7 +319,7 @@ export default function MovieDetails(props) {
                             <a
                               key={key}
                               className="pr-3 text-custom-blue hover:text-custom-orange"
-                              href={`https://twitter.com/${movieExternalIds[key]}`}
+                              href={`https://twitter.com/${tvShowExternalIds[key]}`}
                               target="_blank">
                               <FontAwesomeIcon
                                 icon={['fab', 'twitter']}
@@ -320,9 +335,9 @@ export default function MovieDetails(props) {
             </div>
             <div className="w-1/2 flex justify-end text-xl align-baseline text-custom-orange p-5">
               <FontAwesomeIcon icon="star" size="2x" />
-              <span className="px-2">{movie.vote_average}</span>
+              <span className="px-2">{tvShow.vote_average}</span>
               <FontAwesomeIcon icon="user-friends" size="2x" />
-              <span className="pl-2">{movie.vote_count}</span>
+              <span className="pl-2">{tvShow.vote_count}</span>
             </div>
           </div>
         </div>
@@ -336,13 +351,13 @@ export default function MovieDetails(props) {
                 <button
                   className={activeCastTab === 'cast' ? `active_tab` : 'tab'}
                   onClick={() => setActiveCastTab('cast')}>
-                  Cast ({movieCast.cast.length})
+                  Cast ({tvShowCast.cast.length})
                 </button>
 
                 <button
                   className={activeCastTab === 'crew' ? `active_tab` : 'tab'}
                   onClick={() => setActiveCastTab('crew')}>
-                  Crew ({movieCast.crew.length})
+                  Crew ({tvShowCast.crew.length})
                 </button>
               </div>
             </div>
@@ -361,19 +376,19 @@ export default function MovieDetails(props) {
                     activeMediaTab === 'screenshots' ? `active_tab` : 'tab'
                   }
                   onClick={() => setActiveMediaTab('screenshots')}>
-                  Screenshots ({movieImages.backdrops.length})
+                  Screenshots ({tvShowImages.backdrops.length})
                 </button>
                 <button
                   className={activeMediaTab === 'videos' ? `active_tab` : 'tab'}
                   onClick={() => setActiveMediaTab('videos')}>
-                  Videos ({movieVideos.length})
+                  Videos ({tvShowVideos.length})
                 </button>
                 <button
                   className={
                     activeMediaTab === 'posters' ? `active_tab` : 'tab'
                   }
                   onClick={() => setActiveMediaTab('posters')}>
-                  Posters ({movieImages.posters.length})
+                  Posters ({tvShowImages.posters.length})
                 </button>
               </div>
             </div>

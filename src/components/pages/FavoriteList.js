@@ -5,6 +5,7 @@ import { RootContext } from 'components/context/RootContext'
 // Components
 import Loader from 'components/helpers/Loader'
 import MovieDetails from 'components/MovieDetails'
+import TvShowDetails from 'components/TvShowDetails'
 import NavigationTabs from 'components/helpers/NavigationTabs'
 // Data
 import { FavoriteListTabs } from 'assets/data/tabs'
@@ -14,7 +15,7 @@ export default function FavoriteList() {
   const [favoriteMoviesList, setFavoriteMoviesList] = useState(null)
   const [favoriteTvShowsList, setFavoriteTvShowsList] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
-  const [selectedMovie, setSelectedMovie] = useState(null)
+  const [selectedShow, setSelectedShow] = useState(null)
   const [activeTab, setActiveTab] = useState('Movies')
   const [showList, setShowList] = useState(favoriteMoviesList)
 
@@ -55,9 +56,12 @@ export default function FavoriteList() {
       )
   }, [])
 
-  const movieDetails = () => {
-    if (selectedMovie?.id) {
-      return <MovieDetails movie={selectedMovie} />
+  const showDetails = () => {
+    // Only tv shows have first_air_date
+    if (selectedShow?.first_air_date) {
+      return <TvShowDetails tvShow={selectedShow} />
+    } else if (selectedShow?.id) {
+      return <MovieDetails movie={selectedShow} />
     } else {
       return (
         <div className="w-full text-center">
@@ -70,6 +74,7 @@ export default function FavoriteList() {
   function handleOnTabClick(value) {
     setActiveTab(value)
     setShowList(value === 'Movies' ? favoriteMoviesList : favoriteTvShowsList)
+    setSelectedShow(null)
   }
 
   if (isLoading) {
@@ -95,7 +100,7 @@ export default function FavoriteList() {
         <div className="flex overflow-x-scroll">
           {showList.map(movie => {
             let classes = null
-            if (selectedMovie?.id !== movie.id) {
+            if (selectedShow?.id !== movie.id) {
               classes =
                 'w-48 transform easy-in duration-100 hover:-translate-y-1 hover:scale-110'
             } else {
@@ -107,17 +112,19 @@ export default function FavoriteList() {
                 <div className={`${classes}`}>
                   <img
                     className="rounded-lg"
-                    onClick={() => setSelectedMovie(movie)}
+                    onClick={() => setSelectedShow(movie)}
                     src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
                   />
-                  <p className="text-center mt-2">{movie.title}</p>
+                  <p className="text-center mt-2">
+                    {movie.title ?? movie.original_name}
+                  </p>
                 </div>
               </div>
             )
           })}
         </div>
 
-        <div className="mt-10">{movieDetails()}</div>
+        <div className="mt-10">{showDetails()}</div>
       </div>
     )
   }
