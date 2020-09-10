@@ -126,14 +126,23 @@ export default function Main() {
         className="flex w-auto m-2"
         columnClassName="m-2">
         {movies.map(movie => {
-          return (
-            <div key={movie.id}>
-              <Link to={`/movie/${movie.id}`}>
-                <MovieCard movie={movie} key={movie.id} />
-              </Link>
-              {/* <Route path={`/movie/${movie.id}`} component={MovieDetails} /> */}
-            </div>
-          )
+          if (movie?.first_air_date) {
+            return (
+              <div key={movie.id}>
+                <Link to={`/tv-show/${movie.id}`}>
+                  <MovieCard movie={movie} key={movie.id} />
+                </Link>
+              </div>
+            )
+          } else {
+            return (
+              <div key={movie.id}>
+                <Link to={`/movie/${movie.id}`}>
+                  <MovieCard movie={movie} key={movie.id} />
+                </Link>
+              </div>
+            )
+          }
         })}
       </Masonry>
 

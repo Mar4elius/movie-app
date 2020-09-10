@@ -2,6 +2,7 @@ import React from 'react'
 // Components
 import Layout from 'components/Layout'
 import MovieDetails from 'components/MovieDetails'
+import TvShowDetails from 'components/TvShowDetails'
 // Support
 import { Route } from 'react-router-dom'
 // Data
@@ -21,6 +22,7 @@ function App() {
           />
         ))}
         <Route path="/movie/:id" component={MovieDetails} />
+        <Route path="/tv-show/:id" component={TvShowDetails} />
       </Layout>
     </div>
   )
