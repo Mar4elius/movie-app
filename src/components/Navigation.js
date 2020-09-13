@@ -21,6 +21,7 @@ export default function Navigation(props) {
     }).then(response => {
       sessionStorage.clear()
       props.onLogoutClick()
+      window.location.replace('/')
     })
   }
 
@@ -48,6 +49,7 @@ export default function Navigation(props) {
                     {/* <Link/> is the element you could use to navigate through routes. */}
                     <NavLink
                       to={route.path}
+                      disabled={route.isDisabled}
                       className="text-custom-blue"
                       activeClassName="text-custom-orange">
                       <div className="flex justify-start hover:text-custom-orange">

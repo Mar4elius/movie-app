@@ -7,6 +7,7 @@ import Loader from 'components/helpers/Loader'
 import MovieDetails from 'components/MovieDetails'
 import TvShowDetails from 'components/TvShowDetails'
 import NavigationTabs from 'components/helpers/NavigationTabs'
+import ListButtons from 'components/helpers/ListButtons'
 // Data
 import { FavoriteListTabs } from 'assets/data/tabs'
 
@@ -88,7 +89,7 @@ export default function FavoriteList() {
     )
   } else {
     return (
-      <div className="w-full mt-3">
+      <div className="w-full h-full mt-3">
         <div className="flex items-center justify-center mb-3">
           <NavigationTabs
             tabs={FavoriteListTabs}
@@ -118,6 +119,7 @@ export default function FavoriteList() {
                   <p className="text-center mt-2">
                     {movie.title ?? movie.original_name}
                   </p>
+                  <ListButtons classes={`flex justify-evenly mt-2`} />
                 </div>
               </div>
             )

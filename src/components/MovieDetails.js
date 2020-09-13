@@ -246,7 +246,7 @@ export default function MovieDetails(props) {
                   </button>
                   <button>
                     <span className="text-custom-blue hover:text-custom-orange">
-                      <FontAwesomeIcon icon="eye" size="2x" />
+                      <FontAwesomeIcon icon="video" size="2x" />
                     </span>
                   </button>
                 </div>
