@@ -6,27 +6,29 @@ export default function ListButtons({ classes }) {
   return (
     <div className={classes}>
       <button
+        disabled
         data-tip="Add to Collection (Not Available Yet)"
         data-for="collection">
         <span className="pr-3 text-custom-blue hover:text-custom-orange">
           <FontAwesomeIcon icon="layer-group" size="2x" />
         </span>
       </button>
-      <ReactTooltip id="collection" />
+      <ReactTooltip id="collection" place="top" />
       <button data-tip="Add to Favorite" data-for="favorite">
         <span className="pr-3 text-custom-blue hover:text-custom-orange">
           <FontAwesomeIcon icon="heart" size="2x" />
         </span>
       </button>
-      <ReactTooltip id="favorite" />
+      <ReactTooltip id="favorite" place="top" />
       <button
+        disabled
         data-tip="Add to Watchlist (Not Available Yet)"
         data-for="watchlist">
         <span className="text-custom-blue hover:text-custom-orange">
           <FontAwesomeIcon icon="video" size="2x" />
         </span>
       </button>
-      <ReactTooltip id="watchlist" />
+      <ReactTooltip id="watchlist" place="top" />
     </div>
   )
 }

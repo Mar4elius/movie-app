@@ -5,20 +5,20 @@ const routes = [
   {
     icon: 'igloo',
     name: 'Home',
-    path: '/',
+    path: '/home',
     component: Main,
     isDisabled: false,
   },
   {
     icon: 'video',
-    name: 'Watch List',
+    name: 'Watch List (In Progress)',
     path: '/watch-list',
     component: 'WatchList',
     isDisabled: true,
   },
   {
     icon: 'layer-group',
-    name: 'Collections',
+    name: 'Collections (In Progress)',
     path: '/my-collections',
     component: 'MyCollections',
     isDisabled: true,
@@ -29,13 +29,6 @@ const routes = [
     path: '/favorite-list',
     component: FavoriteList,
     isDisabled: false,
-  },
-  {
-    icon: 'random',
-    name: 'Random',
-    path: '/random',
-    component: 'Random',
-    isDisabled: true,
   },
   {
     icon: 'door-open',

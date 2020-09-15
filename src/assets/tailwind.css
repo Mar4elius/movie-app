@@ -45,6 +45,10 @@ h6 {
   @apply border-custom-orange text-custom-orange;
 }
 
+.disabled-link {
+  @apply pointer-events-none text-gray-500;
+}
+
 @import 'tailwindcss/components';
 
 @import 'tailwindcss/utilities';

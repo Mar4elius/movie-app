@@ -45,15 +45,16 @@ export default function Navigation(props) {
             {routes.map(route => {
               if (route.name !== 'Logout') {
                 return (
-                  <li className="m-5 cursor-pointer" key={route.icon}>
+                  <li className="m-5 text-custom-blue" key={route.icon}>
                     {/* <Link/> is the element you could use to navigate through routes. */}
                     <NavLink
                       to={route.path}
-                      disabled={route.isDisabled}
-                      className="text-custom-blue"
+                      className={
+                        route.isDisabled ? 'disabled-link' : 'cursor-pointer'
+                      }
                       activeClassName="text-custom-orange">
                       <div className="flex justify-start hover:text-custom-orange">
-                        <div className="w-16 flex justify-center">
+                        <div className="flex justify-center">
                           <FontAwesomeIcon icon={route.icon} size="2x" />
                         </div>
                         <div className="tracking-widest mx-5">
@@ -70,7 +71,7 @@ export default function Navigation(props) {
                     key={route.icon}
                     onClick={logout}>
                     <div className="flex justify-start text-custom-blue hover:text-custom-orange">
-                      <div className="w-16 flex justify-center">
+                      <div className="flex justify-center">
                         <FontAwesomeIcon icon={route.icon} size="2x" />
                       </div>
                       <div className="tracking-widest mx-5">

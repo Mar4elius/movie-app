@@ -81,15 +81,13 @@ export default function FavoriteList() {
   }
 
   function handleMouseHover(movie) {
-    console.log(isHover)
-    if (!isHover) {
-      setOnHoverMovie(movie)
-      setIsHover(true)
-    } else {
+    if (isHover) {
       setIsHover(false)
       setOnHoverMovie(null)
+    } else {
+      setOnHoverMovie(movie)
+      setIsHover(true)
     }
-    console.log(isHover)
   }
 
   if (isLoading) {
@@ -121,7 +119,6 @@ export default function FavoriteList() {
                 'w-48 transform easy-in duration-100 hover:-translate-y-1 hover:scale-110'
             } else {
               classes = 'w-64 transform easy-in-out duration-100'
-              //   buttons = <ListButtons classes={`flex justify-evenly mt-2`} />
             }
 
             buttons =
@@ -130,7 +127,7 @@ export default function FavoriteList() {
               ) : null
             return (
               <div
-                className="m-6 min-h-full"
+                className="m-6"
                 key={movie.id}
                 onMouseEnter={() => handleMouseHover(movie)}
                 onMouseLeave={() => handleMouseHover(movie)}>
