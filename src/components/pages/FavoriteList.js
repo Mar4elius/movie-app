@@ -19,6 +19,8 @@ export default function FavoriteList() {
   const [selectedShow, setSelectedShow] = useState(null)
   const [activeTab, setActiveTab] = useState('Movies')
   const [showList, setShowList] = useState(favoriteMoviesList)
+  const [isHover, setIsHover] = useState(false)
+  const [onHoverMovie, setOnHoverMovie] = useState(null)
 
   useEffect(() => {
     setIsLoading(true)
@@ -78,6 +80,18 @@ export default function FavoriteList() {
     setSelectedShow(null)
   }
 
+  function handleMouseHover(movie) {
+    console.log(isHover)
+    if (!isHover) {
+      setOnHoverMovie(movie)
+      setIsHover(true)
+    } else {
+      setIsHover(false)
+      setOnHoverMovie(null)
+    }
+    console.log(isHover)
+  }
+
   if (isLoading) {
     return (
       <Loader
@@ -101,15 +115,25 @@ export default function FavoriteList() {
         <div className="flex overflow-x-scroll">
           {showList.map(movie => {
             let classes = null
+            let buttons = null
             if (selectedShow?.id !== movie.id) {
               classes =
                 'w-48 transform easy-in duration-100 hover:-translate-y-1 hover:scale-110'
             } else {
               classes = 'w-64 transform easy-in-out duration-100'
+              //   buttons = <ListButtons classes={`flex justify-evenly mt-2`} />
             }
 
+            buttons =
+              isHover && onHoverMovie?.id === movie.id ? (
+                <ListButtons classes={`flex justify-evenly mt-2`} />
+              ) : null
             return (
-              <div className="m-3" key={movie.id}>
+              <div
+                className="m-6 min-h-full"
+                key={movie.id}
+                onMouseEnter={() => handleMouseHover(movie)}
+                onMouseLeave={() => handleMouseHover(movie)}>
                 <div className={`${classes}`}>
                   <img
                     className="rounded-lg"
@@ -119,7 +143,7 @@ export default function FavoriteList() {
                   <p className="text-center mt-2">
                     {movie.title ?? movie.original_name}
                   </p>
-                  <ListButtons classes={`flex justify-evenly mt-2`} />
+                  {buttons}
                 </div>
               </div>
             )
