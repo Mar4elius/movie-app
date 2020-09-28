@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 // Components
 import Modal from 'components/modals/Modal'
 import StyledButton from 'components/helpers/StyledButton'
@@ -7,6 +7,8 @@ import StyledButton from 'components/helpers/StyledButton'
 import API from 'api/api'
 
 export default function WelcomeModal(props) {
+  const currentURL = window.location.href
+
   async function getAuthenticationToken() {
     await API.get('/authentication/token/new', {
       params: {
@@ -14,19 +16,8 @@ export default function WelcomeModal(props) {
       },
     }).then(response => {
       window.location.replace(
-        `https://www.themoviedb.org/authenticate/${response.data.request_token}?redirect_to=http://localhost:3000`
+        `https://www.themoviedb.org/authenticate/${response.data.request_token}?redirect_to=${currentURL}/home`
       )
-    })
-  }
-
-  async function loginAsGuest() {
-    await API.get('/authentication/guest_session/new', {
-      params: {
-        api_key: process.env.REACT_APP_TMDB_API_KEY,
-      },
-    }).then(response => {
-      sessionStorage.setItem('guestSessionId', response.data.guest_session_id)
-      props.setGuestSessionId(response.data.guest_session_id)
     })
   }
 
@@ -61,7 +52,9 @@ export default function WelcomeModal(props) {
           classes="inputClasses">
           Login
         </StyledButton>
-        <StyledButton handleOnClick={loginAsGuest} classes="inputClasses">
+        <StyledButton
+          handleOnClick={() => props.loginAsGuest(false)}
+          classes="inputClasses">
           Proceed as Guest
         </StyledButton>
       </div>

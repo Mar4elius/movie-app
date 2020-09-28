@@ -7,13 +7,9 @@ export default props => {
     account: props.activeAccount,
     sessionId: props.sessionId,
   }
-  if (props?.activeAccount) {
-    return (
-      <RootContext.Provider value={defaultContext}>
-        {props.children}
-      </RootContext.Provider>
-    )
-  } else {
-    return null
-  }
+  return (
+    <RootContext.Provider value={defaultContext}>
+      {props.children}
+    </RootContext.Provider>
+  )
 }

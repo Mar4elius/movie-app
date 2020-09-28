@@ -50,7 +50,10 @@ export default function Navigation(props) {
                     <NavLink
                       to={route.path}
                       className={
-                        route.isDisabled ? 'disabled-link' : 'cursor-pointer'
+                        route.isDisabled ||
+                        (route.requiresSessionId && !activeAccount.sessionId)
+                          ? 'disabled-link'
+                          : 'cursor-pointer'
                       }
                       activeClassName="text-custom-orange">
                       <div className="flex justify-start hover:text-custom-orange">

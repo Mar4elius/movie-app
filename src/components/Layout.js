@@ -66,12 +66,9 @@ export default function Layout(props) {
   const [sessionId, setSessionId] = useState(
     sessionStorage.getItem('sessionId')
   )
-  const [guestSessionId, setGuestSessionId] = useState(
-    sessionStorage.getItem('guestSessionId')
-  )
   const [activeAccount, setActiveAccount] = useState(null)
 
-  if ((sessionId || guestSessionId) && showModal) {
+  if (sessionId && showModal) {
     setShowModal(false)
   }
 
@@ -82,14 +79,16 @@ export default function Layout(props) {
   }
 
   useEffect(() => {
-    API.get('/account', {
-      params: {
-        api_key: process.env.REACT_APP_TMDB_API_KEY,
-        session_id: sessionId,
-      },
-    }).then(response => {
-      setActiveAccount(response.data)
-    })
+    if (sessionId) {
+      API.get('/account', {
+        params: {
+          api_key: process.env.REACT_APP_TMDB_API_KEY,
+          session_id: sessionId,
+        },
+      }).then(response => {
+        setActiveAccount(response.data)
+      })
+    }
   }, [sessionId])
 
   return (
@@ -97,7 +96,7 @@ export default function Layout(props) {
       <WelcomeModal
         showModal={showModal}
         setSessionId={setSessionId}
-        setGuestSessionId={setGuestSessionId}
+        loginAsGuest={setShowModal}
       />
       <RootContext activeAccount={activeAccount} sessionId={sessionId}>
         <div className="w-5/6">

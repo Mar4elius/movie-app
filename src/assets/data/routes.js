@@ -8,6 +8,7 @@ const routes = [
     path: '/home',
     component: Main,
     isDisabled: false,
+    requiresSessionId: false,
   },
   {
     icon: 'video',
@@ -15,6 +16,7 @@ const routes = [
     path: '/watch-list',
     component: 'WatchList',
     isDisabled: true,
+    requiresSessionId: true,
   },
   {
     icon: 'layer-group',
@@ -22,6 +24,7 @@ const routes = [
     path: '/my-collections',
     component: 'MyCollections',
     isDisabled: true,
+    requiresSessionId: true,
   },
   {
     icon: 'heart',
@@ -29,6 +32,7 @@ const routes = [
     path: '/favorite-list',
     component: FavoriteList,
     isDisabled: false,
+    requiresSessionId: true,
   },
   {
     icon: 'door-open',
@@ -36,6 +40,7 @@ const routes = [
     path: null,
     component: null,
     isDisabled: false,
+    requiresSessionId: true,
   },
 ]
 
