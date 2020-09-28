@@ -37,7 +37,9 @@ export default function Navigation(props) {
           <ul>
             <li className="m-5 cursor-pointer">
               <div className="flex justify-start">
-                <span className="w-full text-custom-blue hover:text-custom-orange flex justify-center">
+                <span
+                  className="w-full text-custom-blue hover:text-custom-orange flex justify-center"
+                  onClick={props.onShowHideClick}>
                   <FontAwesomeIcon icon="caret-right" size="3x" />
                 </span>
               </div>

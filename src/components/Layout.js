@@ -66,9 +66,14 @@ export default function Layout(props) {
   const [sessionId, setSessionId] = useState(
     sessionStorage.getItem('sessionId')
   )
-  const [activeAccount, setActiveAccount] = useState(null)
+  const [guestSessionId, setGuestSessionId] = useState(
+    sessionStorage.getItem('guestSessionId')
+  )
 
-  if (sessionId && showModal) {
+  const [activeAccount, setActiveAccount] = useState(null)
+  const [showNavigation, setShowNavigation] = useState(true)
+
+  if ((sessionId || guestSessionId) && showModal) {
     setShowModal(false)
   }
 
@@ -76,6 +81,10 @@ export default function Layout(props) {
     setShowModal(true)
     setSessionId(null)
     setActiveAccount(null)
+  }
+
+  function showHideNavigation() {
+    setShowNavigation(!showNavigation)
   }
 
   useEffect(() => {
@@ -96,15 +105,19 @@ export default function Layout(props) {
       <WelcomeModal
         showModal={showModal}
         setSessionId={setSessionId}
-        loginAsGuest={setShowModal}
+        setGuestSessionId={setGuestSessionId}
       />
       <RootContext activeAccount={activeAccount} sessionId={sessionId}>
-        <div className="w-5/6">
+        <div className={showNavigation ? `w-5/6` : `w-full`}>
           <TopBar />
           {props.children}
         </div>
-        <div className="w-1/6">
-          <Navigation sessionId={sessionId} onLogoutClick={resetState} />
+        <div className={showNavigation ? `w-1/6` : ''}>
+          <Navigation
+            sessionId={sessionId}
+            onLogoutClick={resetState}
+            onShowHideClick={showHideNavigation}
+          />
         </div>
       </RootContext>
     </div>
