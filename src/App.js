@@ -4,7 +4,7 @@ import Layout from 'components/Layout'
 import MovieDetails from 'components/MovieDetails'
 import TvShowDetails from 'components/TvShowDetails'
 // Support
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 // Data
 import routes from './assets/data/routes'
 
@@ -21,6 +21,9 @@ function App() {
             component={route.component}
           />
         ))}
+        <Route exact path="/">
+          <Redirect to="/home" />
+        </Route>
         <Route path="/movie/:id" component={MovieDetails} />
         <Route path="/tv-show/:id" component={TvShowDetails} />
       </Layout>

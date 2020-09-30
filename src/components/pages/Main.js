@@ -12,7 +12,7 @@ import Pagination from 'components/helpers/Pagination'
 import { RootContext } from 'components/context/RootContext'
 
 export default function Main() {
-  const searchTerm = useContext(RootContext).searchTerm
+  let searchTerm = useContext(RootContext).searchTerm
   // State variables
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -26,26 +26,14 @@ export default function Main() {
     500: 1,
   }
 
-  // Note: the empty deps array [] means
-  // this useEffect will run once
-  // similar
-  useEffect(() => {
-    searchTrending()
-  }, [trendStatus])
-
   useEffect(() => {
     if (searchTerm?.length) {
       searchMovies(searchTerm)
-    }
-  }, [searchTerm])
-
-  useEffect(() => {
-    if (searchTerm) {
-      searchMovies(searchTerm)
+      setTrendStatus(null)
     } else {
       searchTrending()
     }
-  }, [currentPage])
+  }, [searchTerm, currentPage])
 
   function searchTrending() {
     setIsLoading(true)
@@ -70,6 +58,12 @@ export default function Main() {
         setError(error)
       }
     )
+  }
+
+  function handleTrendClick(value) {
+    console.log(value)
+    setTrendStatus(value)
+    searchTrending()
   }
 
   function searchMovies(value) {
@@ -117,12 +111,12 @@ export default function Main() {
           className={`${
             trendStatus === `week` ? 'active_tab' : 'tab'
           } mr-5 text-lg`}
-          onClick={() => setTrendStatus('week')}>
+          onClick={() => handleTrendClick('week')}>
           This Week
         </button>
         <button
           className={`${trendStatus === `day` ? 'active_tab' : 'tab'} text-lg`}
-          onClick={() => setTrendStatus('day')}>
+          onClick={() => handleTrendClick('day')}>
           Today
         </button>
         <div className="flex justify-end">
