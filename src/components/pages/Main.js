@@ -30,6 +30,24 @@ export default function Main() {
   // this useEffect will run once
   // similar
   useEffect(() => {
+    searchTrending()
+  }, [trendStatus])
+
+  useEffect(() => {
+    if (searchTerm?.length) {
+      searchMovies(searchTerm)
+    }
+  }, [searchTerm])
+
+  useEffect(() => {
+    if (searchTerm) {
+      searchMovies(searchTerm)
+    } else {
+      searchTrending()
+    }
+  }, [currentPage])
+
+  function searchTrending() {
     setIsLoading(true)
     const url =
       trendStatus === 'week' ? `/trending/all/week` : '/trending/all/day'
@@ -52,17 +70,10 @@ export default function Main() {
         setError(error)
       }
     )
-  }, [currentPage, trendStatus])
-
-  useEffect(() => {
-    if (searchTerm?.length) {
-      searchMovies(searchTerm)
-    }
-  }, [searchTerm])
+  }
 
   function searchMovies(value) {
     setIsLoading(true)
-    setCurrentPage(1)
     API.get(`/search/multi`, {
       params: {
         api_key: process.env.REACT_APP_TMDB_API_KEY,

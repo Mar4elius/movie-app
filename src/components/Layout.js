@@ -7,6 +7,7 @@ import RootContext from 'components/context/RootContext'
 // Support
 import { library } from '@fortawesome/fontawesome-svg-core'
 import API from 'api/api'
+import { useHistory } from 'react-router-dom'
 
 import {
   faUser,
@@ -73,6 +74,7 @@ export default function Layout(props) {
   const [activeAccount, setActiveAccount] = useState(null)
   const [showNavigation, setShowNavigation] = useState(true)
   const [search, setSearch] = useState(null)
+  let history = useHistory()
 
   if ((sessionId || guestSessionId) && showModal) {
     setShowModal(false)
@@ -90,6 +92,7 @@ export default function Layout(props) {
 
   function setSearchTerm(e) {
     setSearch(e.target.value)
+    history.push('/home')
   }
 
   useEffect(() => {

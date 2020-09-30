@@ -9,6 +9,7 @@ const routes = [
     component: Main,
     isDisabled: false,
     requiresSessionId: false,
+    tooltipText: '',
   },
   {
     icon: 'video',
@@ -17,6 +18,7 @@ const routes = [
     component: 'WatchList',
     isDisabled: true,
     requiresSessionId: true,
+    tooltipText: 'Not Available for Guest',
   },
   {
     icon: 'layer-group',
@@ -25,6 +27,7 @@ const routes = [
     component: 'MyCollections',
     isDisabled: true,
     requiresSessionId: true,
+    tooltipText: 'Not Available for Guest',
   },
   {
     icon: 'heart',
@@ -33,6 +36,7 @@ const routes = [
     component: FavoriteList,
     isDisabled: false,
     requiresSessionId: true,
+    tooltipText: 'Not Available for Guest',
   },
   {
     icon: 'door-open',
@@ -41,6 +45,7 @@ const routes = [
     component: null,
     isDisabled: false,
     requiresSessionId: true,
+    tooltipText: '',
   },
 ]
 

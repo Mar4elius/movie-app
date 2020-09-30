@@ -34,7 +34,6 @@ export default function MovieDetails(props) {
     }).then(
       response => {
         const { images, videos, external_ids, credits } = response.data
-        console.log(response.data)
         setTvShow(response.data)
         setTvShowImages(images)
         setTvShowVideos(videos.results)
@@ -44,7 +43,6 @@ export default function MovieDetails(props) {
       },
       error => {
         setIsLoading(false)
-        console.log(error)
       }
     )
   }, [tvShowId, props.tvShow])

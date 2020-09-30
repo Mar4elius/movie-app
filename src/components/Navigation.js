@@ -8,6 +8,8 @@ import routes from 'assets/data/routes'
 // Image
 import tmdb from 'assets/images/tmdb.svg'
 import { RootContext } from './context/RootContext'
+// Components
+import ReactTooltip from 'react-tooltip'
 
 export default function Navigation(props) {
   const activeAccount = useContext(RootContext)
@@ -49,7 +51,10 @@ export default function Navigation(props) {
                 return (
                   <li className="m-5 text-custom-blue" key={route.icon}>
                     {/* <Link/> is the element you could use to navigate through routes. */}
+                    <ReactTooltip id={route.name} place="top" />
                     <NavLink
+                      data-tip={route.tooltipText}
+                      data-for={route.name}
                       to={route.path}
                       className={
                         route.isDisabled ||
