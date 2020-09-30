@@ -72,6 +72,7 @@ export default function Layout(props) {
 
   const [activeAccount, setActiveAccount] = useState(null)
   const [showNavigation, setShowNavigation] = useState(true)
+  const [search, setSearch] = useState(null)
 
   if ((sessionId || guestSessionId) && showModal) {
     setShowModal(false)
@@ -85,6 +86,10 @@ export default function Layout(props) {
 
   function showHideNavigation() {
     setShowNavigation(!showNavigation)
+  }
+
+  function setSearchTerm(e) {
+    setSearch(e.target.value)
   }
 
   useEffect(() => {
@@ -107,9 +112,12 @@ export default function Layout(props) {
         setSessionId={setSessionId}
         setGuestSessionId={setGuestSessionId}
       />
-      <RootContext activeAccount={activeAccount} sessionId={sessionId}>
+      <RootContext
+        activeAccount={activeAccount}
+        sessionId={sessionId}
+        searchTerm={search}>
         <div className={showNavigation ? `w-5/6` : `w-full`}>
-          <TopBar />
+          <TopBar handleOnBlur={setSearchTerm} />
           {props.children}
         </div>
         <div className={showNavigation ? `w-1/6` : ''}>

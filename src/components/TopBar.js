@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { RootContext } from './context/RootContext'
 
-export default function TopBar() {
+export default function TopBar(props) {
   const activeAccount = useContext(RootContext)
-  function handleOnBlur(e) {}
+
   return (
     <div className="flex justify-around h-24 bg-custom-grey bg-opacity-50 items-center border-b-2 border-custom-blue">
       <div className="w-2/3 flex justify-end">
@@ -11,7 +11,7 @@ export default function TopBar() {
           type="text"
           placeholder="Enter some letters..."
           className="border-2 border-custom-blue h-12 p-2 w-64 rounded-lg"
-          onBlur={handleOnBlur}
+          onBlur={props.handleOnBlur}
         />
       </div>
       <div className="flex justify-end w-1/2 items-center">

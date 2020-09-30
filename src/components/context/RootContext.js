@@ -6,6 +6,7 @@ export default props => {
   const defaultContext = {
     account: props.activeAccount,
     sessionId: props.sessionId,
+    searchTerm: props.searchTerm,
   }
   return (
     <RootContext.Provider value={defaultContext}>

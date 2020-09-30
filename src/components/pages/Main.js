@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 // Support
 import API from 'api/api'
 import { Link } from 'react-router-dom'
@@ -9,8 +9,10 @@ import Errors from 'components/helpers/Errors'
 import MovieCard from 'components/helpers/MovieCard'
 import Loader from 'components/helpers/Loader'
 import Pagination from 'components/helpers/Pagination'
+import { RootContext } from 'components/context/RootContext'
 
 export default function Main() {
+  const searchTerm = useContext(RootContext).searchTerm
   // State variables
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -51,6 +53,12 @@ export default function Main() {
       }
     )
   }, [currentPage, trendStatus])
+
+  useEffect(() => {
+    if (searchTerm?.length) {
+      searchMovies(searchTerm)
+    }
+  }, [searchTerm])
 
   function searchMovies(value) {
     setIsLoading(true)
