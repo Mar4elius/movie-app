@@ -105,20 +105,25 @@ export default function Main() {
         showErrors={error?.response?.data?.success}
         error={error?.response?.data}
       />
-      <div className="w-full flex items-center justify-center align-top mb-6">
-        <h5 className="mr-5 font-bold">Trending:</h5>
-        <button
-          className={`${
-            trendStatus === `week` ? 'active_tab' : 'tab'
-          } mr-5 text-lg`}
-          onClick={() => handleTrendClick('week')}>
-          This Week
-        </button>
-        <button
-          className={`${trendStatus === `day` ? 'active_tab' : 'tab'} text-lg`}
-          onClick={() => handleTrendClick('day')}>
-          Today
-        </button>
+      <div className="w-full flex items-center justify-between align-top mb-6 flex-1">
+        <div></div>
+        <div className="flex">
+          <h5 className="mr-5 font-bold">Trending:</h5>
+          <button
+            className={`${
+              trendStatus === `week` ? 'active_tab' : 'tab'
+            } mr-5 text-lg`}
+            onClick={() => handleTrendClick('week')}>
+            This Week
+          </button>
+          <button
+            className={`${
+              trendStatus === `day` ? 'active_tab' : 'tab'
+            } text-lg`}
+            onClick={() => handleTrendClick('day')}>
+            Today
+          </button>
+        </div>
         <div className="flex justify-end">
           <Pagination
             handleOnClick={setCurrentPage}
