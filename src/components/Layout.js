@@ -72,7 +72,7 @@ export default function Layout(props) {
   )
 
   const [activeAccount, setActiveAccount] = useState(null)
-  const [showNavigation, setShowNavigation] = useState(true)
+  const [showNavigation, setShowNavigation] = useState(false)
   const [search, setSearch] = useState(null)
   let history = useHistory()
 
@@ -86,7 +86,7 @@ export default function Layout(props) {
     setActiveAccount(null)
   }
 
-  function showHideNavigation() {
+  function handleShowHideNavigation() {
     setShowNavigation(!showNavigation)
   }
 
@@ -115,19 +115,21 @@ export default function Layout(props) {
         setSessionId={setSessionId}
         setGuestSessionId={setGuestSessionId}
       />
+
       <RootContext
         activeAccount={activeAccount}
         sessionId={sessionId}
         searchTerm={search}>
-        <div className={showNavigation ? `w-5/6` : `w-full`}>
+        <div className={showNavigation ? `w-5/6` : `w-11/12`}>
           <TopBar handleOnBlur={setSearchTerm} />
           {props.children}
         </div>
-        <div className={showNavigation ? `w-1/6` : ''}>
+        <div className={showNavigation ? `w-1/6` : 'w-1/12'}>
           <Navigation
             sessionId={sessionId}
             onLogoutClick={resetState}
-            onShowHideClick={showHideNavigation}
+            onShowHideClick={handleShowHideNavigation}
+            showNavigation={showNavigation}
           />
         </div>
       </RootContext>

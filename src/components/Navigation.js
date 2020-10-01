@@ -27,8 +27,20 @@ export default function Navigation(props) {
     })
   }
 
+  let showIconNames = name => {
+    if (props.showNavigation) {
+      return (
+        <div className="tracking-widest mx-5">
+          <p>{name}</p>
+        </div>
+      )
+    } else {
+      return null
+    }
+  }
+
   return (
-    <div className="min-h-full border-l-2 border-custom-blue">
+    <div className="min-h-full border-l-2 border-custom-blue flex justify-center">
       <div className="fixed">
         <div className="w-full flex justify-center items-center">
           <a href="https://www.themoviedb.org" target="_blank">
@@ -42,7 +54,10 @@ export default function Navigation(props) {
                 <span
                   className="w-full text-custom-blue hover:text-custom-orange flex justify-center"
                   onClick={props.onShowHideClick}>
-                  <FontAwesomeIcon icon="caret-right" size="3x" />
+                  <FontAwesomeIcon
+                    icon={props.showNavigation ? 'caret-right' : 'caret-left'}
+                    size="3x"
+                  />
                 </span>
               </div>
             </li>
@@ -67,9 +82,7 @@ export default function Navigation(props) {
                         <div className="flex justify-center">
                           <FontAwesomeIcon icon={route.icon} size="2x" />
                         </div>
-                        <div className="tracking-widest mx-5">
-                          <p>{route.name}</p>
-                        </div>
+                        {showIconNames(route.name)}
                       </div>
                     </NavLink>
                   </li>
@@ -77,16 +90,14 @@ export default function Navigation(props) {
               } else if (activeAccount.account?.id) {
                 return (
                   <li
-                    className="m-5 cursor-pointer "
+                    className="m-5 cursor-pointer"
                     key={route.icon}
                     onClick={logout}>
                     <div className="flex justify-start text-custom-blue hover:text-custom-orange">
                       <div className="flex justify-center">
                         <FontAwesomeIcon icon={route.icon} size="2x" />
                       </div>
-                      <div className="tracking-widest mx-5">
-                        <p>{route.name}</p>
-                      </div>
+                      {showIconNames(route.name)}
                     </div>
                   </li>
                 )
