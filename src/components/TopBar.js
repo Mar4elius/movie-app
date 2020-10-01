@@ -3,6 +3,9 @@ import { RootContext } from './context/RootContext'
 
 export default function TopBar(props) {
   const activeAccount = useContext(RootContext)
+  const avatar = activeAccount?.username
+    ? `https://api.adorable.io/avatars/285/${activeAccount.username}@adorable.io.png`
+    : `https://api.adorable.io/avatars/285/nouser@adorable.io.png`
 
   return (
     <div className="flex justify-around h-24 bg-custom-grey bg-opacity-50 items-center border-b-2 border-custom-blue">
@@ -21,10 +24,7 @@ export default function TopBar(props) {
             activeAccount.account?.username ||
             'Guest'}
         </p>
-        <img
-          className="mr-3 rounded-full"
-          src={`https://secure.gravatar.com/avatar/${activeAccount.account?.avatar.gravatar.hash}.jpg?s=64`}
-        />
+        <img className="mr-3 rounded-full w-20" src={avatar} />
       </div>
     </div>
   )
