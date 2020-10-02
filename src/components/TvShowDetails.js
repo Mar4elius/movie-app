@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // Components
 import Loader from 'components/helpers/Loader'
+import ReactTooltip from 'react-tooltip'
 // Images
 import noFace from 'assets/images/no-face.png'
 
@@ -21,6 +22,8 @@ export default function MovieDetails(props) {
   const [activeCastTab, setActiveCastTab] = useState('cast')
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const hoverText = 'Not available yet'
 
   useEffect(() => {
     setIsLoading(true)
@@ -247,17 +250,20 @@ export default function MovieDetails(props) {
 
               <div className="flex justify-between">
                 <div className="flex">
-                  <button>
+                  <ReactTooltip id="list" place="top" />
+                  <button data-for="list" data-tip={hoverText}>
                     <span className="pr-3 text-custom-blue hover:text-custom-orange">
                       <FontAwesomeIcon icon="list" size="2x" />
                     </span>
                   </button>
-                  <button>
+                  <ReactTooltip id="favorite" place="top" />
+                  <button data-for="favorite" data-tip={hoverText}>
                     <span className="pr-3 text-custom-blue hover:text-custom-orange">
                       <FontAwesomeIcon icon="heart" size="2x" />
                     </span>
                   </button>
-                  <button>
+                  <ReactTooltip id="watchlist" place="top" />
+                  <button data-for="watchlist" data-tip={hoverText}>
                     <span className="text-custom-blue hover:text-custom-orange">
                       <FontAwesomeIcon icon="eye" size="2x" />
                     </span>
