@@ -3,8 +3,8 @@ import { RootContext } from './context/RootContext'
 
 export default function TopBar(props) {
   const activeAccount = useContext(RootContext)
-  const avatar = activeAccount?.username
-    ? `https://api.adorable.io/avatars/285/${activeAccount.username}@adorable.io.png`
+  const avatar = activeAccount.account?.username
+    ? `https://api.adorable.io/avatars/285/${activeAccount.account?.username}@adorable.io.png`
     : `https://api.adorable.io/avatars/285/nouser@adorable.io.png`
 
   return (
