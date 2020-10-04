@@ -16,7 +16,7 @@ export default function WelcomeModal(props) {
       },
     }).then(response => {
       window.location.replace(
-        `https://www.themoviedb.org/authenticate/${response.data.request_token}?redirect_to=${currentURL}/home`
+        `https://www.themoviedb.org/authenticate/${response.data.request_token}?redirect_to=${currentURL}`
       )
     })
   }

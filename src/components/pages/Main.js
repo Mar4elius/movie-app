@@ -61,7 +61,6 @@ export default function Main() {
   }
 
   function handleTrendClick(value) {
-    console.log(value)
     setTrendStatus(value)
     searchTrending()
   }
@@ -106,7 +105,7 @@ export default function Main() {
         error={error?.response?.data}
       />
       <div className="w-full flex items-center justify-between align-top mb-6 flex-1">
-        <div></div>
+        <div />
         <div className="flex">
           <h5 className="mr-5 font-bold">Trending:</h5>
           <button
