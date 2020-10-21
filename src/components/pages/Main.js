@@ -33,7 +33,7 @@ export default function Main() {
     } else {
       searchTrending()
     }
-  }, [searchTerm, currentPage])
+  }, [searchTerm, currentPage, trendStatus])
 
   function searchTrending() {
     setIsLoading(true)
@@ -61,8 +61,8 @@ export default function Main() {
   }
 
   function handleTrendClick(value) {
+    setCurrentPage(1)
     setTrendStatus(value)
-    searchTrending()
   }
 
   function searchMovies(value) {
