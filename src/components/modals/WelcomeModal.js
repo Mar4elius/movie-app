@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 // Components
 import Modal from 'components/modals/Modal'
 import StyledButton from 'components/helpers/StyledButton'
@@ -8,6 +8,9 @@ import API from 'api/api'
 
 export default function WelcomeModal(props) {
   const currentURL = window.location.href
+  const [queryParams, setQueryParams] = useState(
+    new URLSearchParams(window.location.search)
+  )
 
   async function getAuthenticationToken() {
     await API.get('/authentication/token/new', {
@@ -18,6 +21,7 @@ export default function WelcomeModal(props) {
       window.location.replace(
         `https://www.themoviedb.org/authenticate/${response.data.request_token}?redirect_to=${currentURL}`
       )
+      setQueryParams(new URLSearchParams(window.location.search))
     })
   }
 
@@ -33,7 +37,6 @@ export default function WelcomeModal(props) {
   }
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search)
     if (queryParams.has('approved') && queryParams.get('approved') === 'true') {
       const bodyData = {
         request_token: queryParams.get('request_token'),
@@ -47,7 +50,7 @@ export default function WelcomeModal(props) {
         props.setSessionId(response.data.session_id)
       })
     }
-  }, [])
+  }, [queryParams])
 
   return (
     <Modal header="Welcome" showModal={props.showModal}>
