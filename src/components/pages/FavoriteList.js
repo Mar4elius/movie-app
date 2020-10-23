@@ -80,14 +80,14 @@ export default function FavoriteList() {
     setSelectedShow(null)
   }
 
-  function handleMouseHover(movie) {
-    if (isHover) {
-      setIsHover(false)
-      setOnHoverMovie(null)
-    } else {
-      setOnHoverMovie(movie)
-      setIsHover(true)
-    }
+  function handleMouseEnter(movie) {
+    setOnHoverMovie(movie)
+    setIsHover(true)
+  }
+
+  function handleMouseLeave() {
+    setIsHover(false)
+    setOnHoverMovie(null)
   }
 
   if (isLoading) {
@@ -129,8 +129,8 @@ export default function FavoriteList() {
               <div
                 className="m-6"
                 key={movie.id}
-                onMouseEnter={() => handleMouseHover(movie)}
-                onMouseLeave={() => handleMouseHover(movie)}>
+                onMouseEnter={() => handleMouseEnter(movie)}
+                onMouseLeave={() => handleMouseLeave(movie)}>
                 <div className={`${classes}`}>
                   <img
                     className="rounded-lg"
