@@ -140,7 +140,6 @@ export default function Layout(props) {
         </div>
         <div className={showNavigation ? `w-1/6` : 'w-1/12'}>
           <Navigation
-            sessionId={sessionId}
             onLogoutClick={resetState}
             onShowHideClick={handleShowHideNavigation}
             showNavigation={showNavigation}
