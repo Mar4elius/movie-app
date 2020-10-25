@@ -96,17 +96,31 @@ export default function Layout(props) {
   }
 
   useEffect(() => {
-    if (sessionId) {
+    // to handle Warning: Can't perform a React state update on an unmounted component. error
+    let isMounted = true
+    if (sessionId && !activeAccount) {
       API.get('/account', {
         params: {
           api_key: process.env.REACT_APP_TMDB_API_KEY,
           session_id: sessionId,
         },
-      }).then(response => {
-        setActiveAccount(response.data)
+    }).then(response => {
+        if (isMounted) {
+          setActiveAccount(response.data)
+        }
       })
     }
-  }, [sessionId])
+    // clean up function
+    return () => (isMounted = false)
+  }, [activeAccount, sessionId])
+
+  const PropsChild = () => {
+      if ((activeAccount && sessionId) || guestSessionId) {
+          return props.children;
+      } else {
+          return null;
+      }
+  }
 
   return (
     <div className="flex flex-wrap">
@@ -122,7 +136,7 @@ export default function Layout(props) {
         searchTerm={search}>
         <div className={showNavigation ? `w-5/6` : `w-11/12`}>
           <TopBar handleOnBlur={setSearchTerm} />
-          {props.children}
+          <PropsChild />
         </div>
         <div className={showNavigation ? `w-1/6` : 'w-1/12'}>
           <Navigation
