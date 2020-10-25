@@ -12,7 +12,7 @@ import Pagination from 'components/helpers/Pagination'
 import { RootContext } from 'components/context/RootContext'
 
 export default function Main() {
-  let searchTerm = useContext(RootContext).searchTerm
+  const [searchTerm, setSearchTerm] = useState(useContext(RootContext).searchTerm)
   // State variables
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -61,6 +61,7 @@ export default function Main() {
   }
 
   function handleTrendClick(value) {
+    setSearchTerm('');
     setCurrentPage(1)
     setTrendStatus(value)
   }

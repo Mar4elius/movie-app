@@ -93,8 +93,11 @@ export default function Layout(props) {
   }
 
   function setSearchTerm(e) {
-    setSearch(e.target.value)
-    history.push('/home')
+      const isEnterPress = e.type === 'keypress' && e.key === 'Enter';
+      if (isEnterPress || e.type === 'blur') {
+          setSearch(e.target.value)
+          history.push('/home')
+      }
   }
 
   useEffect(() => {
@@ -137,7 +140,7 @@ export default function Layout(props) {
         sessionId={sessionId}
         searchTerm={search}>
         <div className={showNavigation ? `w-5/6` : `w-11/12`}>
-          <TopBar handleOnBlur={setSearchTerm} />
+          <TopBar handleOnBlur={setSearchTerm} handleKeyPress={setSearchTerm} />
           <PropsChild />
         </div>
         <div className={showNavigation ? `w-1/6` : 'w-1/12'}>

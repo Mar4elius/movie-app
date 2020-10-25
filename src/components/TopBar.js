@@ -15,6 +15,7 @@ export default function TopBar(props) {
           placeholder="Enter some letters..."
           className="border-2 border-custom-blue h-12 p-2 w-64 rounded-lg"
           onBlur={props.handleOnBlur}
+          onKeyPress={props.handleKeyPress}
         />
       </div>
       <div className="flex justify-end w-1/2 items-center">
