@@ -7,7 +7,6 @@ import RootContext from 'components/context/RootContext'
 // Support
 import { library } from '@fortawesome/fontawesome-svg-core'
 import API from 'api/api'
-import { useHistory } from 'react-router-dom'
 
 import {
   faUser,
@@ -75,8 +74,7 @@ export default function Layout(props) {
 
   const [activeAccount, setActiveAccount] = useState(null)
   const [showNavigation, setShowNavigation] = useState(false)
-  const [search, setSearch] = useState(null)
-  let history = useHistory()
+  const [search, setSearch] = useState('')
 
   if ((sessionId || guestSessionId) && showModal) {
     setShowModal(false)
@@ -90,14 +88,6 @@ export default function Layout(props) {
 
   function handleShowHideNavigation() {
     setShowNavigation(!showNavigation)
-  }
-
-  function setSearchTerm(e) {
-      const isEnterPress = e.type === 'keypress' && e.key === 'Enter';
-      if (isEnterPress || e.type === 'blur') {
-          setSearch(e.target.value)
-          history.push('/home')
-      }
   }
 
   useEffect(() => {
@@ -140,7 +130,8 @@ export default function Layout(props) {
         sessionId={sessionId}
         searchTerm={search}>
         <div className={showNavigation ? `w-5/6` : `w-11/12`}>
-          <TopBar handleOnBlur={setSearchTerm} handleKeyPress={setSearchTerm} />
+          <TopBar
+            setSearch={setSearch} />
           <PropsChild />
         </div>
         <div className={showNavigation ? `w-1/6` : 'w-1/12'}>

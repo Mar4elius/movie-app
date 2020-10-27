@@ -33,7 +33,7 @@ export default function Main() {
     } else {
       searchTrending()
     }
-  }, [searchTerm, currentPage, trendStatus])
+  }, [currentPage, trendStatus])
 
   function searchTrending() {
     setIsLoading(true)
