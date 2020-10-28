@@ -1,6 +1,5 @@
-import React, { useContext, useCallback, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { RootContext } from './context/RootContext'
-import debounce from 'lodash.debounce';
 import { useHistory } from 'react-router-dom'
 
 export default function TopBar(props) {

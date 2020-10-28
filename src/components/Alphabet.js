@@ -18,14 +18,14 @@ export default function Alphabet(props) {
   return (
     <div className="m-2">
       <ul className="flex text-2xl justify-between">
-        {alphabet.map(symbol => {
+        {alphabet.map(letter => {
           return (
-            <li className="m-2" key={symbol} className="cursor-pointer">
+            <li className="m-2" key={letter} className="cursor-pointer">
               <span className="text-custom-dark-blue hover:text-custom-orange flex">
                 <button
                   onClick={e => setSelectedLetter(e.target.textContent)}
-                  className=" transform hover:-translate-y-2 hover:font-bold">
-                  {symbol}
+                  className={letter === selectedLetter ? "transform hover:-translate-y-2 hover:font-bold text-custom-orange" : "transform hover:-translate-y-2 hover:font-bold" }>
+                  {letter}
                 </button>
               </span>
             </li>

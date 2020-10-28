@@ -13,7 +13,6 @@ import { RootContext } from 'components/context/RootContext'
 
 export default function Main() {
   const [searchTerm, setSearchTerm] = useState(useContext(RootContext).searchTerm)
-  // State variables
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [movies, setMovies] = useState([])
