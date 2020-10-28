@@ -26,13 +26,17 @@ export default function Main() {
   }
 
   useEffect(() => {
-    if (searchTerm?.length) {
-      searchMovies(searchTerm)
-      setTrendStatus(null)
-    } else {
+    if (trendStatus) {
       searchTrending()
     }
   }, [currentPage, trendStatus])
+
+  useEffect(() => {
+    if (searchTerm?.length) {
+        setTrendStatus(null)
+      searchMovies(searchTerm)
+    }
+  }, [currentPage, searchTerm])
 
   function searchTrending() {
     setIsLoading(true)
@@ -63,6 +67,10 @@ export default function Main() {
     setSearchTerm('');
     setCurrentPage(1)
     setTrendStatus(value)
+  }
+
+  function handleAlphabetOnClick(value) {
+      setSearchTerm(value)
   }
 
   function searchMovies(value) {
@@ -98,7 +106,7 @@ export default function Main() {
 
   return (
     <div className="w-full">
-      <Alphabet handleOnClick={searchMovies} />
+      <Alphabet handleOnClick={handleAlphabetOnClick} />
 
       <Errors
         showErrors={error?.response?.data?.success}
